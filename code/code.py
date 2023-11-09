@@ -67,10 +67,25 @@ def listener(user_requests):
 
 bot.set_update_listener(listener)
 
-commands = [
-    telebot.types.BotCommand("start", "Start the bot"),
-    telebot.types.BotCommand("help", "Display help message"),
+custom_commands = [
+    ("/start", "Start the bot"),
+    ("/menu", "Show the main menu"),
+    ("/add", "Add an expense"),
+    ("/pdf", "Generate a PDF report"),
+    ("/history", "View expenditure history"),
+    ("/edit", "Edit a transaction"),
+    ("/display", "Display total expenditure"),
+    ("/estimate", "Estimate future expenditure"),
+    ("/delete", "Delete a transaction"),
+    ("/budget", "Manage your budget"),
+    ("/analytics", "View analytics"),
+    ("/predict", "Predict future budget"),
+    ("/help", "Show available commands"),
+    ("/faq", "Frequently Asked Questions"),
 ]
+
+# Convert custom commands to BotCommand objects
+commands = [telebot.types.BotCommand(command, description) for command, description in custom_commands]
 
 # Set the bot's commands
 bot.set_my_commands(commands)
