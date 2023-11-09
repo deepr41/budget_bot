@@ -67,6 +67,15 @@ def listener(user_requests):
 
 bot.set_update_listener(listener)
 
+commands = [
+    telebot.types.BotCommand("start", "Start the bot"),
+    telebot.types.BotCommand("help", "Display help message"),
+]
+
+# Set the bot's commands
+bot.set_my_commands(commands)
+
+
 @bot.message_handler(commands=["help"])
 def help(m):
 
