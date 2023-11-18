@@ -6,6 +6,8 @@ from datetime import datetime
 option = {}
 
 # === Documentation of add.py ===
+default_currency = "$"
+supported_currencies = [default_currency, "Rs", "Pounds", "Dirham"]
 
 def run(message, bot):
     """
@@ -66,10 +68,46 @@ def post_category_selection(message, bot):
                 raise Exception(
                     'Sorry, I don\'t recognise this category "{}"!'.format(selected_category)
                 )
-            option[chat_id] = selected_category
-            message = bot.send_message(
-                chat_id, "How much did you spend on {}? \n(Numeric values only)".format(str(option[chat_id])),)
-            bot.register_next_step_handler(message, post_amount_input, bot, selected_category)
+           # Prompt the user to choose a currency
+            markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
+            markup.row_width = 2
+            for currency in supported_currencies:
+                markup.add(currency)
+            
+            msg = bot.reply_to(message, "Select Currency", reply_markup=markup)
+            bot.register_next_step_handler(msg, post_currency_selection, bot, selected_category)
+
+    except Exception as e:
+        logging.exception(str(e))
+        bot.reply_to(message, "Oh no! " + str(e))
+        display_text = ""
+        commands = helper.getCommands()
+        for c in commands:  
+            # generate help text out of the commands dictionary defined at the top
+            display_text += "/" + c + ": "
+            display_text += commands[c] + "\n"
+        bot.send_message(chat_id, "Please select a menu option from below:")
+        bot.send_message(chat_id, display_text)
+
+def post_currency_selection(message, bot, selected_category):
+    try:
+        chat_id = message.chat.id
+        selected_currency = message.text
+
+        if selected_currency not in supported_currencies:
+            bot.send_message(
+                chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
+            )
+            raise Exception(
+                'Sorry, I don\'t recognise this currency "{}"!'.format(selected_currency)
+            )
+
+        option[chat_id] = selected_category
+        # Now, proceed with asking the user for the amount
+        message = bot.send_message(
+            chat_id, "How much did you spend on {} in {}? \n(Numeric values only)".format(str(option[chat_id]), selected_currency)
+        )
+        bot.register_next_step_handler(message, post_amount_input, bot, selected_category, selected_currency)
     except Exception as e:
         logging.exception(str(e))
         bot.reply_to(message, "Oh no! " + str(e))
@@ -124,7 +162,7 @@ def post_expense_selection(message,bot):
         )
         bot.send_message(
             chat_id,
-            "The following expenditure has been recorded: You have spent ${} for {} on {}".format(
+            "The following expenditure has been recorded: You have spent {} for {} on {}".format(
                 amount_str, category_str, date_str
             ),
         )
@@ -133,7 +171,7 @@ def post_expense_selection(message,bot):
         logging.exception(str(e))
         bot.reply_to(message, "Oh no. " + str(e))
 
-def post_amount_input(message, bot, selected_category):
+def post_amount_input(message, bot, selected_category, selected_currency):
     """
     post_amount_input(message, bot): It takes 2 arguments for processing -
     message which is the message from the user, and bot which is the telegram bot
@@ -152,7 +190,7 @@ def post_amount_input(message, bot, selected_category):
         amount_value = helper.validate_entered_amount(amount_entered)  # validate
         if amount_value == 0:  # cannot be $0 spending
             raise Exception("Spent amount has to be a non-zero number.")
-
+ 
         date_of_entry = datetime.today().strftime(
             helper.getDateFormat())
         date_str, category_str, amount_str = (
@@ -162,13 +200,13 @@ def post_amount_input(message, bot, selected_category):
         )
         helper.write_json(
             add_user_record(
-                chat_id, "{},{},{}".format(date_str, category_str, amount_str)
+                chat_id, "{},{},{},{}".format(date_str, category_str, amount_str, selected_currency)
             )
         )
         bot.send_message(
             chat_id,
-            "The following expenditure has been recorded: You have spent ${} for {} on {}".format(
-                amount_str, category_str, date_str
+            "The following expenditure has been recorded: You have spent {} {} for {} on {}".format(
+                selected_currency,amount_str, category_str, date_str
             ),
         )
         helper.display_remaining_budget(message, bot, selected_category)
@@ -190,7 +228,7 @@ def add_user_record(chat_id, record_to_be_added):
     if str(chat_id) not in user_list:
         user_list[str(chat_id)] = helper.createNewUserRecord()
 
-    user_list[str(chat_id)]["data"].append(record_to_be_added)
+    user_list[str(chat_id)]["data"].append(f"{record_to_be_added}")
     print("!" * 5)
     print("after")
     print(user_list)
