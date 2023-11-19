@@ -6,8 +6,7 @@ from datetime import datetime
 option = {}
 
 # === Documentation of add.py ===
-default_currency = "$"
-supported_currencies = [default_currency, "Rs", "Pounds", "Dirham"]
+supported_currencies = ["USD", "INR", "EUR", "GBP"]
 
 def run(message, bot):
     """

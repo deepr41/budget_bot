@@ -9,3 +9,4 @@ pytest-mock
 pytest
 python-telegram-bot-calendar
 mock
+forex_python
