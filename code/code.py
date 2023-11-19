@@ -68,7 +68,6 @@ def listener(user_requests):
 bot.set_update_listener(listener)
 
 custom_commands = [
-    ("/start", "Start the bot"),
     ("/menu", "Show the main menu"),
     ("/add", "Add an expense"),
     ("/pdf", "Generate a PDF report"),
