@@ -58,12 +58,7 @@ def update_overall_budget(message, chat_id, bot):
     for currency in supported_currencies:
         markup.add(currency)
 
-    if helper.isOverallBudgetAvailable(chat_id):
-        currentBudget = helper.getOverallBudget(chat_id)
-        msg_string = "Current Budget is ${}\n\nHow much is your new monthly budget? \n(Enter numeric values only)"
-        message = bot.send_message(chat_id, msg_string.format(currentBudget))
-    else:
-        message = bot.reply_to(message, "Select Currency", reply_markup=markup)
+    message = bot.reply_to(message, "Select Currency", reply_markup=markup)
         
     bot.register_next_step_handler(message, post_budget_currency_selection, bot)
 
@@ -81,21 +76,17 @@ def post_budget_currency_selection(message, bot):
             )
 
         # Now, proceed with asking the user for the amount
-        message = bot.send_message(
-            chat_id, "How much is your monthly budget? \n(Enter numeric values only)"
-        )
+        if helper.isOverallBudgetAvailable(chat_id):
+            currentBudget, currency = helper.getOverallBudget(chat_id)
+            msg_string = "Current Budget is {} {}\n\nHow much is your new monthly budget? \n(Enter numeric values only)"
+            message = bot.send_message(chat_id, msg_string.format(currency, currentBudget))
+        else:
+            message = bot.send_message(
+                chat_id, "How much is your monthly budget? \n(Enter numeric values only)"
+            )
         bot.register_next_step_handler(message, post_overall_amount_input, bot, selected_currency)
     except Exception as e:
         logging.exception(str(e))
-        bot.reply_to(message, "Oh no! " + str(e))
-        display_text = ""
-        commands = helper.getCommands()
-        for c in commands:  
-            # generate help text out of the commands dictionary defined at the top
-            display_text += "/" + c + ": "
-            display_text += commands[c] + "\n"
-        bot.send_message(chat_id, "Please select a menu option from below:")
-        bot.send_message(chat_id, display_text)
 
 def post_overall_amount_input(message, bot, selected_currency):
     """
@@ -116,6 +107,7 @@ def post_overall_amount_input(message, bot, selected_currency):
         if str(chat_id) not in user_list:
             user_list[str(chat_id)] = helper.createNewUserRecord()
         user_list[str(chat_id)]["budget"]["overall"] = amount_value
+        user_list[str(chat_id)]["budget"]["currency"] = selected_currency
         total_budget = 0
         if helper.isCategoryBudgetAvailable(chat_id):
             for c in helper.getCategoryBudget(chat_id).values():
@@ -129,7 +121,7 @@ def post_overall_amount_input(message, bot, selected_currency):
             user_list[str(chat_id)]["budget"]["category"]["uncategorized"] = uncategorized_budget
         helper.write_json(user_list)
         bot.send_message(chat_id, "Budget Updated!")
-        budget_view.display_overall_budget(message, bot, selected_currency)
+        budget_view.display_overall_budget(message, bot)
         print(user_list)
         return user_list
     except Exception as e:

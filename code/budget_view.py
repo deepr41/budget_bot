@@ -28,7 +28,7 @@ def run(message, bot):
     except Exception as e:
         helper.throw_exception(e, message, bot, logging)
 
-def display_overall_budget(message, bot, selected_currency):
+def display_overall_budget(message, bot):
     """
     display_overall_budget(message, bot): It takes 2 arguments for processing -
     message which is the message from the user, and bot which is the telegram bot
@@ -36,8 +36,8 @@ def display_overall_budget(message, bot, selected_currency):
     user based on their chat ID using the helper module and returns the same through the bot to the Telegram UI.
     """
     chat_id = message.chat.id
-    data = helper.getOverallBudget(chat_id)
-    bot.send_message(chat_id, f"Overall Budget: {selected_currency} " + data)
+    data, currency = helper.getOverallBudget(chat_id)
+    bot.send_message(chat_id, f"Overall Budget: {currency} " + data)
 
 def display_category_budget(message, bot):
     """
