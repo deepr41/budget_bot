@@ -144,6 +144,7 @@ def post_expense_selection(message,bot):
     expense_data = expense_record.split(",")
     amount = expense_data[2]
     category = expense_data[1]
+    currency = expense_data[3]
     print(amount)
     amount_value = helper.validate_entered_amount(amount)  # validate
     try:
@@ -157,13 +158,13 @@ def post_expense_selection(message,bot):
         )
         helper.write_json(
             add_user_record(
-                chat_id, "{},{},{}".format(date_str, category_str, amount_str)
+                chat_id, "{},{},{}".format(date_str, category_str, amount_str, currency)
             )
         )
         bot.send_message(
             chat_id,
-            "The following expenditure has been recorded: You have spent {} for {} on {}".format(
-                amount_str, category_str, date_str
+            "The following expenditure has been recorded: You have spent {} {} for {} on {}".format(
+                currency, amount_str, category_str, date_str
             ),
         )
         helper.display_remaining_budget(message, bot, category)
