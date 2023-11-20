@@ -4,7 +4,6 @@ import budget_view
 from telebot import types
 
 # === Documentation of budget_update.py ===
-supported_currencies = ["USD", "INR", "EUR", "GBP"]
 
 def run(message, bot):
     """
@@ -37,13 +36,13 @@ def post_type_selection(message, bot):
             )
             raise Exception('Sorry I don\'t recognise this operation "{}"!'.format(op))
         if op == options["overall"]:
-            update_overall_budget(message, chat_id, bot)
+            update_overall_budget(chat_id, bot)
         elif op == options["category"]:
             update_category_budget(message, bot)
     except Exception as e:
         helper.throw_exception(e, message, bot, logging)
 
-def update_overall_budget(message, chat_id, bot):
+def update_overall_budget(chat_id, bot):
     """
     update_overall_budget(message, bot): It takes 2 arguments for processing - message which is the
     message from the user, and bot which is the telegram bot object. This function is called when the
@@ -52,42 +51,17 @@ def update_overall_budget(message, chat_id, bot):
     along with the prompt for the new (to be updated) budget, or just asks for the new budget. It passes control
     to the post_overall_amount_input function in the same file.
     """
-    markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-    markup.row_width = 2
-    for currency in supported_currencies:
-        markup.add(currency)
+    if helper.isOverallBudgetAvailable(chat_id):
+        currentBudget = helper.getOverallBudget(chat_id)
+        msg_string = "Current Budget is ${}\n\nHow much is your new monthly budget? \n(Enter numeric values only)"
+        message = bot.send_message(chat_id, msg_string.format(currentBudget))
+    else:
+        message = bot.send_message(
+            chat_id, "How much is your monthly budget? \n(Enter numeric values only)"
+        )
+    bot.register_next_step_handler(message, post_overall_amount_input, bot)
 
-    message = bot.reply_to(message, "Select Currency", reply_markup=markup)
-        
-    bot.register_next_step_handler(message, post_budget_currency_selection, bot)
-
-def post_budget_currency_selection(message, bot):
-    try:
-        chat_id = message.chat.id
-        selected_currency = message.text
-
-        if selected_currency not in supported_currencies:
-            bot.send_message(
-                chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
-            )
-            raise Exception(
-                'Sorry, I don\'t recognise this currency "{}"!'.format(selected_currency)
-            )
-
-        # Now, proceed with asking the user for the amount
-        if helper.isOverallBudgetAvailable(chat_id):
-            currentBudget, currency = helper.getOverallBudget(chat_id)
-            msg_string = "Current Budget is {} {}\n\nHow much is your new monthly budget? \n(Enter numeric values only)"
-            message = bot.send_message(chat_id, msg_string.format(currency, currentBudget))
-        else:
-            message = bot.send_message(
-                chat_id, "How much is your monthly budget? \n(Enter numeric values only)"
-            )
-        bot.register_next_step_handler(message, post_overall_amount_input, bot, selected_currency)
-    except Exception as e:
-        logging.exception(str(e))
-
-def post_overall_amount_input(message, bot, selected_currency):
+def post_overall_amount_input(message, bot):
     """
     update_overall_budget(message, bot): It takes 2 arguments for processing -
     message which is the message from the user, and bot which is the telegram bot object.
@@ -105,8 +79,7 @@ def post_overall_amount_input(message, bot, selected_currency):
         user_list = helper.read_json()
         if str(chat_id) not in user_list:
             user_list[str(chat_id)] = helper.createNewUserRecord()
-        user_list[str(chat_id)]["budget"]["overall"] = amount_value
-        user_list[str(chat_id)]["budget"]["currency"] = selected_currency
+        user_list[str(chat_id)]["budget"]["budget"] = amount_value
         total_budget = 0
         if helper.isCategoryBudgetAvailable(chat_id):
             for c in helper.getCategoryBudget(chat_id).values():
@@ -170,7 +143,6 @@ def post_category_selection(message, bot):
                 raise Exception(
                     'Sorry I don\'t recognise this category "{}"!'.format(selected_category)
                 )
-            
             if helper.isCategoryBudgetByCategoryAvailable(chat_id, selected_category):
                 currentBudget = helper.getCategoryBudgetByCategory(
                     chat_id, selected_category
@@ -185,9 +157,8 @@ def post_category_selection(message, bot):
                     chat_id,
                     "Enter monthly budget for " + selected_category + "\n(Enter numeric values only)",
                 )
-            _, selected_currency = helper.getOverallBudget(chat_id)
             bot.register_next_step_handler(
-                message, post_category_amount_input, bot, selected_category, selected_currency
+                message, post_category_amount_input, bot, selected_category
             )
     except Exception as e:
         helper.throw_exception(e, message, bot, logging)
@@ -202,7 +173,7 @@ def add_new_category(message,bot):
     msg = bot.reply_to(message, "Select Category", reply_markup=markup)
     bot.register_next_step_handler(msg, post_category_selection, bot)
 
-def post_category_amount_input(message, bot, category, selected_currency):
+def post_category_amount_input(message, bot, category):
     """
     post_category_amount_input(message, bot, category): It takes 2 arguments for
     processing - message which is the message from the user, and bot which is the telegram
@@ -210,6 +181,7 @@ def post_category_amount_input(message, bot, category, selected_currency):
     """
     try:
         chat_id = message.chat.id
+        budget_currency = helper.getOverallCurrency(chat_id)
         amount_value = helper.validate_entered_amount(message.text)
         if amount_value == 0:
             raise Exception("Invalid amount.")
@@ -219,14 +191,13 @@ def post_category_amount_input(message, bot, category, selected_currency):
         if user_list[str(chat_id)]["budget"]["category"] is None:
             user_list[str(chat_id)]["budget"]["category"] = {}
         user_list[str(chat_id)]["budget"]["category"][category] = amount_value
-        user_list[str(chat_id)]["budget"]["currency"] = selected_currency
         message = bot.send_message(
-            chat_id, "Budget for " + category + " is now:" + selected_currency + amount_value
+            chat_id, "Budget for " + category + f" is now: {budget_currency} " + amount_value
         )
         if helper.isCategoryBudgetByCategoryAvailable(chat_id, category):
                 currentBudget = helper.getCategoryBudgetByCategory(chat_id, category)
                 amount_value = str(float(amount_value) - float(currentBudget))
-        if(user_list[str(chat_id)]["budget"]["overall"]) and user_list[str(chat_id)]["budget"]["overall"] != '0':
+        if(user_list[str(chat_id)]["budget"]["budget"]) and user_list[str(chat_id)]["budget"]["budget"] != '0':
             if 'uncategorized' in user_list[str(chat_id)]["budget"]["category"].keys():
                 if round(float(user_list[str(chat_id)]["budget"]["category"]["uncategorized"]) - float(amount_value),2) > 0:
                     user_list[str(chat_id)]["budget"]["category"]["uncategorized"] = str(round(float(user_list[str(chat_id)]["budget"]["category"]["uncategorized"]) - float(amount_value),2))
@@ -237,9 +208,9 @@ def post_category_amount_input(message, bot, category, selected_currency):
             for c in helper.getCategoryBudget(chat_id).values():
                 total_budget += float(c)
             print(total_budget)
-            user_list[str(chat_id)]["budget"]["overall"] = str(total_budget)
+            user_list[str(chat_id)]["budget"]["budget"] = str(total_budget)
         else:
-            user_list[str(chat_id)]["budget"]["overall"] = amount_value
+            user_list[str(chat_id)]["budget"]["budget"] = amount_value
         helper.write_json(user_list)
         budget_view.display_overall_budget(message, bot)
         print(user_list)

@@ -115,7 +115,7 @@ def edit_date(bot, selected_data, result, c, updated):
             )
             break
 
-    user_list[str(chat_id)]["data"] = data_edit
+    user_list[str(chat_id)]["expense"] = data_edit
     helper.write_json(user_list)
     new_date_str = "Date=" + new_date
     updated.append(new_date_str)
@@ -147,7 +147,7 @@ def edit_cat(m, bot, selected_data, updated):
             data_edit[i] = selected_date + "," + new_cat + "," + selected_amount[1:]
             break
 
-    user_list[str(chat_id)]["data"] = data_edit
+    user_list[str(chat_id)]["expense"] = data_edit
     helper.write_json(user_list)
     new_cat_str = "Category=" + new_cat
     updated.append(new_cat_str)
@@ -181,7 +181,7 @@ def edit_cost(m, bot, selected_data, updated):
             ):
                 data_edit[i] = selected_date + "," + selected_category + "," + new_cost
                 break
-        user_list[str(chat_id)]["data"] = data_edit
+        user_list[str(chat_id)]["expense"] = data_edit
         helper.write_json(user_list)
         bot.reply_to(m, "Expense amount is updated")
     else:

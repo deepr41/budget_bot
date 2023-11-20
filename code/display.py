@@ -72,7 +72,7 @@ def display_total(message, bot):
             queryResult = [
                 value for index, value in enumerate(history) if str(query) in value
             ]
-        total_text = calculate_spendings(queryResult)
+        total_text = calculate_spendings(queryResult, chat_id)
         monthly_budget = helper.getCategoryBudget(chat_id)
         print("Print Total Spending", total_text)
         print("Print monthly budget", monthly_budget)
@@ -91,14 +91,14 @@ def display_total(message, bot):
         logging.exception(str(e))
         bot.reply_to(message, str(e))
 
-def calculate_spendings(queryResult):
+def calculate_spendings(queryResult, chat_id):
     """
     calculate_spendings(queryResult): Takes 1 argument for processing - queryResult
     which is the query result from the display total function in the same file.
     It parses the query result and turns it into a form suitable for display on the UI by the user.
     """
     total_dict = {}
-
+    budget_currency = helper.getOverallCurrency(chat_id)
     for row in queryResult:
         # date,cat,money
         s = row.split(",")
@@ -111,5 +111,5 @@ def calculate_spendings(queryResult):
             total_dict[cat] = float(s[2])
     total_text = ""
     for key, value in total_dict.items():
-        total_text += str(key) + " $" + str(value) + "\n"
+        total_text += str(key) + f" {budget_currency} " + str(value) + "\n"
     return total_text
