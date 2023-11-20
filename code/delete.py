@@ -30,8 +30,11 @@ def deleteHistory(chat_id):
     """
     global user_list
     if str(chat_id) in user_list:
-        user_list[str(chat_id)]["data"] = []
-        user_list[str(chat_id)]["budget"]["overall"] = str(0)
+        user_list[str(chat_id)]["expense"] = []
+        user_list[str(chat_id)]["income"] = []
+        user_list[str(chat_id)]["budget"]["budget"] = str(0)
         user_list[str(chat_id)]["budget"]["currency"] = "USD"
         user_list[str(chat_id)]["budget"]["category"] = {}
+        user_list[str(chat_id)]["budget"]["saving"] = str(0)
+        user_list[str(chat_id)]["budget"]["recurrent"] = {}
     return user_list
