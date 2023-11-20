@@ -37,7 +37,7 @@ def post_type_selection(message, bot):
             raise Exception('Sorry I don\'t recognise this operation "{}"!'.format(op))
         if op == options["overall"]:
             update_overall_budget(chat_id, bot)
-        elif op == options["category"]:
+        elif op == options["goal"]:
             update_category_budget(message, bot)
     except Exception as e:
         helper.throw_exception(e, message, bot, logging)
@@ -86,11 +86,11 @@ def post_overall_amount_input(message, bot):
                 total_budget += float(c)
             if total_budget > float(amount_value):
                 raise Exception("Overall budget cannot be less than " + str(total_budget))
-        uncategorized_budget = helper.get_uncategorized_amount(chat_id, amount_value)
-        if float(uncategorized_budget) > 0:
-            if user_list[str(chat_id)]["budget"]["category"] is None:
-                user_list[str(chat_id)]["budget"]["category"] = {}
-            user_list[str(chat_id)]["budget"]["category"]["uncategorized"] = uncategorized_budget
+        # uncategorized_budget = helper.get_uncategorized_amount(chat_id, amount_value)
+        # if float(uncategorized_budget) > 0:
+        #     if user_list[str(chat_id)]["budget"]["goal"] is None:
+        #         user_list[str(chat_id)]["budget"]["goal"] = {}
+            # user_list[str(chat_id)]["budget"]["goal"]["uncategorized"] = uncategorized_budget
         helper.write_json(user_list)
         bot.send_message(chat_id, "Budget Updated!")
         budget_view.display_overall_budget(message, bot)
@@ -113,8 +113,8 @@ def update_category_budget(message, bot):
     markup.row_width = 2
     for c in categories:
         markup.add(c)
-    markup.add("Add new category")
-    msg = bot.reply_to(message, "Select Category", reply_markup=markup)
+    markup.add("Add new goal")
+    msg = bot.reply_to(message, "Select Goal", reply_markup=markup)
     bot.register_next_step_handler(msg, post_category_selection, bot)
 
 
@@ -130,36 +130,42 @@ def post_category_selection(message, bot):
     """
     try:
         chat_id = message.chat.id
-        selected_category = message.text
-        if selected_category == "Add new category":
-            message1 = bot.send_message(chat_id, "Please enter your category")
-            bot.register_next_step_handler(message1, add_new_category, bot)
+        if helper.getOverallBudget == '0':
+            message = bot.send_message(
+                    chat_id,
+                    "No Budget Available",
+                )
         else:
-            categories = helper.getSpendCategories()
-            if selected_category not in categories:
-                bot.send_message(
-                    chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
-                )
-                raise Exception(
-                    'Sorry I don\'t recognise this category "{}"!'.format(selected_category)
-                )
-            if helper.isCategoryBudgetByCategoryAvailable(chat_id, selected_category):
-                currentBudget = helper.getCategoryBudgetByCategory(
-                    chat_id, selected_category
-                )
-                msg_string = "Current monthly budget for {} is {}\n\nEnter monthly budget for {}\n(Enter numeric values only)"
-                message = bot.send_message(
-                    chat_id,
-                    msg_string.format(selected_category, currentBudget, selected_category),
-                )
+            selected_category = message.text
+            if selected_category == "Add new goal":
+                message1 = bot.send_message(chat_id, "Please enter your category")
+                bot.register_next_step_handler(message1, add_new_category, bot)
             else:
-                message = bot.send_message(
-                    chat_id,
-                    "Enter monthly budget for " + selected_category + "\n(Enter numeric values only)",
+                categories = helper.getSpendCategories()
+                if selected_category not in categories:
+                    bot.send_message(
+                        chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
+                    )
+                    raise Exception(
+                        'Sorry I don\'t recognise this category "{}"!'.format(selected_category)
+                    )
+                if helper.isCategoryBudgetByCategoryAvailable(chat_id, selected_category):
+                    currentBudget = helper.getCategoryBudgetByCategory(
+                        chat_id, selected_category
+                    )
+                    msg_string = "Current goal for {} is {}\n\nEnter goal for {}\n(Enter numeric values only)"
+                    message = bot.send_message(
+                        chat_id,
+                        msg_string.format(selected_category, currentBudget, selected_category),
+                    )
+                else:
+                    message = bot.send_message(
+                        chat_id,
+                        "Enter new goal amount for " + selected_category + "\n(Enter numeric values only)",
+                    )
+                bot.register_next_step_handler(
+                    message, post_category_amount_input, bot, selected_category
                 )
-            bot.register_next_step_handler(
-                message, post_category_amount_input, bot, selected_category
-            )
     except Exception as e:
         helper.throw_exception(e, message, bot, logging)
 
@@ -188,32 +194,32 @@ def post_category_amount_input(message, bot, category):
         user_list = helper.read_json()
         if str(chat_id) not in user_list:
             user_list[str(chat_id)] = helper.createNewUserRecord()
-        if user_list[str(chat_id)]["budget"]["category"] is None:
-            user_list[str(chat_id)]["budget"]["category"] = {}
-        user_list[str(chat_id)]["budget"]["category"][category] = amount_value
+        # if user_list[str(chat_id)]["budget"]["goal"] is None:
+        #     user_list[str(chat_id)]["budget"]["goal"] = {}
+        user_list[str(chat_id)]["budget"]["goal"][category] = amount_value
         message = bot.send_message(
-            chat_id, "Budget for " + category + f" is now: {budget_currency} " + amount_value
+            chat_id, "Goal for " + category + f" is now: {budget_currency} " + amount_value
         )
-        if helper.isCategoryBudgetByCategoryAvailable(chat_id, category):
-                currentBudget = helper.getCategoryBudgetByCategory(chat_id, category)
-                amount_value = str(float(amount_value) - float(currentBudget))
-        if(user_list[str(chat_id)]["budget"]["budget"]) and user_list[str(chat_id)]["budget"]["budget"] != '0':
-            if 'uncategorized' in user_list[str(chat_id)]["budget"]["category"].keys():
-                if round(float(user_list[str(chat_id)]["budget"]["category"]["uncategorized"]) - float(amount_value),2) > 0:
-                    user_list[str(chat_id)]["budget"]["category"]["uncategorized"] = str(round(float(user_list[str(chat_id)]["budget"]["category"]["uncategorized"]) - float(amount_value),2))
-                else:
-                    user_list[str(chat_id)]["budget"]["category"]["uncategorized"] = str(0)
-            helper.write_json(user_list)
-            total_budget = 0
-            for c in helper.getCategoryBudget(chat_id).values():
-                total_budget += float(c)
-            print(total_budget)
-            user_list[str(chat_id)]["budget"]["budget"] = str(total_budget)
-        else:
-            user_list[str(chat_id)]["budget"]["budget"] = amount_value
+        # if helper.isCategoryBudgetByCategoryAvailable(chat_id, category):
+        #         currentBudget = helper.getCategoryBudgetByCategory(chat_id, category)
+        #         amount_value = str(float(amount_value) - float(currentBudget))
+        # if(user_list[str(chat_id)]["budget"]["budget"]) and user_list[str(chat_id)]["budget"]["budget"] != '0':
+        #     if 'uncategorized' in user_list[str(chat_id)]["budget"]["goal"].keys():
+        #         if round(float(user_list[str(chat_id)]["budget"]["goal"]["uncategorized"]) - float(amount_value),2) > 0:
+        #             user_list[str(chat_id)]["budget"]["goal"]["uncategorized"] = str(round(float(user_list[str(chat_id)]["budget"]["goal"]["uncategorized"]) - float(amount_value),2))
+        #         else:
+        #             user_list[str(chat_id)]["budget"]["goal"]["uncategorized"] = str(0)
         helper.write_json(user_list)
-        budget_view.display_overall_budget(message, bot)
-        print(user_list)
+        #     total_budget = 0
+        #     for c in helper.getCategoryBudget(chat_id).values():
+        #         total_budget += float(c)
+        #     print(total_budget)
+        #     user_list[str(chat_id)]["budget"]["budget"] = str(total_budget)
+        # else:
+        #     user_list[str(chat_id)]["budget"]["budget"] = amount_value
+        # helper.write_json(user_list)
+        # budget_view.display_overall_budget(message, bot)
+        # print(user_list)
         post_category_add(message, bot)
 
     except Exception as e:

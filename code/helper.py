@@ -18,8 +18,8 @@ spend_display_option = ["Day", "Month"]
 spend_estimate_option = ["Next day", "Next month"]
 update_options = {"continue": "Continue", "exit": "Exit"}
 budget_options = {"update": "Add/Update", "view": "View", "delete": "Delete"}
-budget_types = {"overall": "Overall Budget", "category": "Category-Wise Budget"}
-data_format = {"expense": [], "income": [], "budget": {"budget": 0, "currency": "USD", "category": {}, "recurrent": {}, "saving": 0}}
+budget_types = {"overall": "Overall Budget", "goal": "Category-Wise Goal"}
+data_format = {"expense": [], "income": [], "budget": {"budget": 0, "currency": "USD", "goal": {}, "recurrent": {}, "saving": 0}}
 analytics_options = {"overall": "Overall budget split", "spend": "Split of current spend", "remaining": "Remaining value", "history": "Time series graph of spend history"}
 
 # set of implemented commands and their description
@@ -154,7 +154,7 @@ def getCategoryBudget(chatId):
     data = getUserData(chatId)
     if data is None:
         return None
-    return data["budget"]["category"]
+    return data["budget"]["goal"]
 
 def getCategoryBudgetByCategory(chatId, cat):
     if not isCategoryBudgetByCategoryAvailable(chatId, cat):
@@ -219,7 +219,7 @@ def calculateRemainingOverallBudget(chat_id):
     history = getUserHistory(chat_id)
     query = datetime.now().today().strftime(getMonthFormat())
     queryResult = [value for _, value in enumerate(history) if str(query) in value]
-    return float(budget) - calculate_total_spendings(queryResult)
+    return round(float(budget) - calculate_total_spendings(queryResult), 2)
 
 def calculate_total_spendings(queryResult):
     total = 0
@@ -231,24 +231,24 @@ def calculate_total_spendings(queryResult):
 def display_remaining_category_budget(message, bot, cat):
     chat_id = message.chat.id
     budget_currency = getOverallCurrency(chat_id)
-    if not getCategoryBudgetByCategory(chat_id,cat):
-        updateBudgetCategory(chat_id, cat)
+    # if not getCategoryBudgetByCategory(chat_id,cat):
+    #     updateBudgetCategory(chat_id, cat)
     remaining_budget = calculateRemainingCategoryBudget(chat_id, cat)
     if remaining_budget >= 0:
-        msg = "\nRemaining Budget for " + cat + f" is {budget_currency} " + str(remaining_budget)
+        msg = "\nRemaining Goal amount for " + cat + f" is {budget_currency} " + str(remaining_budget)
+        bot.send_message(chat_id, msg)
     else:
         rem_amount = ""
         rem_amount = str(abs(remaining_budget))
         notify(chat_id, cat, rem_amount, budget_currency)
-        msg = "\nRemaining Budget for " + cat + f" is {budget_currency} " + str(remaining_budget)
-    bot.send_message(chat_id, msg)
+    
 
 def calculateRemainingCategoryBudget(chat_id, cat):
     budget = getCategoryBudgetByCategory(chat_id, cat)
     history = getUserHistory(chat_id)
     query = datetime.now().today().strftime(getMonthFormat())
     queryResult = [value for _, value in enumerate(history) if str(query) in value]
-    return float(budget) - calculate_total_spendings_for_category(queryResult, cat)
+    return round(float(budget) - calculate_total_spendings_for_category(queryResult, cat), 2)
 
 def calculateRemainingCateogryBudgetPercent(chat_id, cat):
     budget = getCategoryBudgetByCategory(chat_id, cat)
@@ -273,7 +273,7 @@ def calculate_total_spendings_for_cateogory_chat_id(chat_id, cat):
 
 def updateBudgetCategory(chatId, category):
     user_list = read_json()
-    user_list[str(chatId)]["budget"]["category"][category] = str(0)
+    user_list[str(chatId)]["budget"]["goal"][category] = str(0)
     write_json(user_list)
 
 def getAvailableCategories(history):

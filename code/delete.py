@@ -34,7 +34,7 @@ def deleteHistory(chat_id):
         user_list[str(chat_id)]["income"] = []
         user_list[str(chat_id)]["budget"]["budget"] = str(0)
         user_list[str(chat_id)]["budget"]["currency"] = "USD"
-        user_list[str(chat_id)]["budget"]["category"] = {}
+        user_list[str(chat_id)]["budget"]["goal"] = {}
         user_list[str(chat_id)]["budget"]["saving"] = str(0)
         user_list[str(chat_id)]["budget"]["recurrent"] = {}
     return user_list
