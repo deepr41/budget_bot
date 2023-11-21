@@ -2,6 +2,8 @@ import helper
 import logging
 import budget_view
 from telebot import types
+from datetime import datetime
+import add
 
 # === Documentation of budget_update.py ===
 
@@ -37,8 +39,10 @@ def post_type_selection(message, bot):
             raise Exception('Sorry I don\'t recognise this operation "{}"!'.format(op))
         if op == options["overall"]:
             update_overall_budget(chat_id, bot)
-        elif op == options["category"]:
-            update_category_budget(message, bot)
+        elif op == options["goal"]:
+            update_category_budget(message, bot, "goal")
+        elif op == options["recurrent"]:
+            update_category_budget(message, bot, "recurrent")
     except Exception as e:
         helper.throw_exception(e, message, bot, logging)
 
@@ -51,6 +55,9 @@ def update_overall_budget(chat_id, bot):
     along with the prompt for the new (to be updated) budget, or just asks for the new budget. It passes control
     to the post_overall_amount_input function in the same file.
     """
+    val = helper.read_json()
+    print("=======================")
+    print(val)
     if helper.isOverallBudgetAvailable(chat_id):
         currentBudget = helper.getOverallBudget(chat_id)
         msg_string = "Current Budget is ${}\n\nHow much is your new monthly budget? \n(Enter numeric values only)"
@@ -86,11 +93,11 @@ def post_overall_amount_input(message, bot):
                 total_budget += float(c)
             if total_budget > float(amount_value):
                 raise Exception("Overall budget cannot be less than " + str(total_budget))
-        uncategorized_budget = helper.get_uncategorized_amount(chat_id, amount_value)
-        if float(uncategorized_budget) > 0:
-            if user_list[str(chat_id)]["budget"]["category"] is None:
-                user_list[str(chat_id)]["budget"]["category"] = {}
-            user_list[str(chat_id)]["budget"]["category"]["uncategorized"] = uncategorized_budget
+        # uncategorized_budget = helper.get_uncategorized_amount(chat_id, amount_value)
+        # if float(uncategorized_budget) > 0:
+        #     if user_list[str(chat_id)]["budget"]["goal"] is None:
+        #         user_list[str(chat_id)]["budget"]["goal"] = {}
+            # user_list[str(chat_id)]["budget"]["goal"]["uncategorized"] = uncategorized_budget
         helper.write_json(user_list)
         bot.send_message(chat_id, "Budget Updated!")
         budget_view.display_overall_budget(message, bot)
@@ -100,7 +107,7 @@ def post_overall_amount_input(message, bot):
         helper.throw_exception(e, message, bot, logging)
 
 
-def update_category_budget(message, bot):
+def update_category_budget(message, bot, op):
     """
     update_category_budget(message, bot): It takes 2 arguments for processing -
     message which is the message from the user, and bot which is the telegram bot object.
@@ -109,13 +116,18 @@ def update_category_budget(message, bot):
     and displays them to the user. It then passes control on to the post_category_selection function.
     """
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-    categories = helper.getSpendCategories()
+    categories = helper.getSpendCategories() 
     markup.row_width = 2
     for c in categories:
         markup.add(c)
-    markup.add("Add new category")
-    msg = bot.reply_to(message, "Select Category", reply_markup=markup)
-    bot.register_next_step_handler(msg, post_category_selection, bot)
+    if op == "goal":
+        markup.add("Add new goal")
+        msg = bot.reply_to(message, "Select Goal", reply_markup=markup)
+        bot.register_next_step_handler(msg, post_category_selection, bot)
+    elif op == "recurrent":
+        markup.add("Add new recurrent spending")
+        msg = bot.reply_to(message, "Select Spending", reply_markup=markup)
+        bot.register_next_step_handler(msg, add_recurrent_spendings, bot)
 
 
 def post_category_selection(message, bot):
@@ -130,36 +142,42 @@ def post_category_selection(message, bot):
     """
     try:
         chat_id = message.chat.id
-        selected_category = message.text
-        if selected_category == "Add new category":
-            message1 = bot.send_message(chat_id, "Please enter your category")
-            bot.register_next_step_handler(message1, add_new_category, bot)
+        if helper.getOverallBudget == '0':
+            message = bot.send_message(
+                    chat_id,
+                    "No Budget Available",
+                )
         else:
-            categories = helper.getSpendCategories()
-            if selected_category not in categories:
-                bot.send_message(
-                    chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
-                )
-                raise Exception(
-                    'Sorry I don\'t recognise this category "{}"!'.format(selected_category)
-                )
-            if helper.isCategoryBudgetByCategoryAvailable(chat_id, selected_category):
-                currentBudget = helper.getCategoryBudgetByCategory(
-                    chat_id, selected_category
-                )
-                msg_string = "Current monthly budget for {} is {}\n\nEnter monthly budget for {}\n(Enter numeric values only)"
-                message = bot.send_message(
-                    chat_id,
-                    msg_string.format(selected_category, currentBudget, selected_category),
-                )
+            selected_category = message.text
+            if selected_category == "Add new goal":
+                message1 = bot.send_message(chat_id, "Please enter your category")
+                bot.register_next_step_handler(message1, add_new_category, bot)
             else:
-                message = bot.send_message(
-                    chat_id,
-                    "Enter monthly budget for " + selected_category + "\n(Enter numeric values only)",
+                categories = helper.getSpendCategories()
+                if selected_category not in categories:
+                    bot.send_message(
+                        chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
+                    )
+                    raise Exception(
+                        'Sorry I don\'t recognise this category "{}"!'.format(selected_category)
+                    )
+                if helper.isCategoryBudgetByCategoryAvailable(chat_id, selected_category):
+                    currentBudget = helper.getCategoryBudgetByCategory(
+                        chat_id, selected_category
+                    )
+                    msg_string = "Current goal for {} is {}\n\nEnter goal for {}\n(Enter numeric values only)"
+                    message = bot.send_message(
+                        chat_id,
+                        msg_string.format(selected_category, currentBudget, selected_category),
+                    )
+                else:
+                    message = bot.send_message(
+                        chat_id,
+                        "Enter new goal amount for " + selected_category + "\n(Enter numeric values only)",
+                    )
+                bot.register_next_step_handler(
+                    message, post_category_amount_input, bot, selected_category
                 )
-            bot.register_next_step_handler(
-                message, post_category_amount_input, bot, selected_category
-            )
     except Exception as e:
         helper.throw_exception(e, message, bot, logging)
 
@@ -188,39 +206,114 @@ def post_category_amount_input(message, bot, category):
         user_list = helper.read_json()
         if str(chat_id) not in user_list:
             user_list[str(chat_id)] = helper.createNewUserRecord()
-        if user_list[str(chat_id)]["budget"]["category"] is None:
-            user_list[str(chat_id)]["budget"]["category"] = {}
-        user_list[str(chat_id)]["budget"]["category"][category] = amount_value
+        user_list[str(chat_id)]["budget"]["goal"][category] = amount_value
         message = bot.send_message(
-            chat_id, "Budget for " + category + f" is now: {budget_currency} " + amount_value
+            chat_id, "Goal for " + category + f" is now: {budget_currency} " + amount_value
         )
-        if helper.isCategoryBudgetByCategoryAvailable(chat_id, category):
-                currentBudget = helper.getCategoryBudgetByCategory(chat_id, category)
-                amount_value = str(float(amount_value) - float(currentBudget))
-        if(user_list[str(chat_id)]["budget"]["budget"]) and user_list[str(chat_id)]["budget"]["budget"] != '0':
-            if 'uncategorized' in user_list[str(chat_id)]["budget"]["category"].keys():
-                if round(float(user_list[str(chat_id)]["budget"]["category"]["uncategorized"]) - float(amount_value),2) > 0:
-                    user_list[str(chat_id)]["budget"]["category"]["uncategorized"] = str(round(float(user_list[str(chat_id)]["budget"]["category"]["uncategorized"]) - float(amount_value),2))
-                else:
-                    user_list[str(chat_id)]["budget"]["category"]["uncategorized"] = str(0)
-            helper.write_json(user_list)
-            total_budget = 0
-            for c in helper.getCategoryBudget(chat_id).values():
-                total_budget += float(c)
-            print(total_budget)
-            user_list[str(chat_id)]["budget"]["budget"] = str(total_budget)
-        else:
-            user_list[str(chat_id)]["budget"]["budget"] = amount_value
         helper.write_json(user_list)
-        budget_view.display_overall_budget(message, bot)
-        print(user_list)
-        post_category_add(message, bot)
+        post_category_add(message, bot, "goal")
+
+    except Exception as e:
+        helper.throw_exception(e, message, bot, logging)
+
+def add_new_spending(message,bot):
+    markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
+    markup.row_width = 2
+    new_category = message.text
+    helper.spend_categories.append(new_category)
+    for c in helper.getSpendCategories():
+        markup.add(c)
+    msg = bot.reply_to(message, "Select Category", reply_markup=markup)
+    bot.register_next_step_handler(msg, add_recurrent_spendings, bot)
+
+
+def add_recurrent_spendings(message, bot):
+    """
+    """
+    try:
+        chat_id = message.chat.id   
+        selected_category = message.text
+        if selected_category == "Add new recurrent spending":
+            message1 = bot.send_message(chat_id, "Please enter your category")
+            bot.register_next_step_handler(message1, add_new_spending, bot)
+        else:
+            categories = helper.getSpendCategories()
+            if selected_category not in categories:
+                bot.send_message(
+                    chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
+                )
+                raise Exception(
+                    'Sorry I don\'t recognise this category "{}"!'.format(selected_category)
+                )
+            if helper.isCategoryBudgetByCategoryAvailable(chat_id, selected_category):
+                currentBudget = helper.getRecurrentBudgetByCategory(
+                    chat_id, selected_category
+                )
+                msg_string = "Current recurrent spending for {} is {}\n\nEnter spending for {}\n(Enter numeric values only)"
+                message = bot.send_message(
+                    chat_id,
+                    msg_string.format(selected_category, currentBudget, selected_category),
+                )
+            else:
+                message = bot.send_message(
+                    chat_id,
+                    "Enter new recurrent spending amount for " + selected_category + "\n(Enter numeric values only)",
+                )
+            bot.register_next_step_handler(
+                message, post_recurrent_amount_input, bot, selected_category
+            )
+    except Exception as e:
+        helper.throw_exception(e, message, bot, logging)
+
+
+def post_recurrent_amount_input(message, bot, category):
+    """
+    post_category_amount_input(message, bot, category): It takes 2 arguments for
+    processing - message which is the message from the user, and bot which is the telegram
+    bot object, and the category chosen by the user.
+    """
+    try:
+        chat_id = message.chat.id
+        budget_currency = helper.getOverallCurrency(chat_id)
+        amount_value = helper.validate_entered_amount(message.text)
+        if amount_value == 0:
+            raise Exception("Invalid amount.")
+        user_list = helper.read_json()
+        if str(chat_id) not in user_list:
+            user_list[str(chat_id)] = helper.createNewUserRecord()
+        user_list[str(chat_id)]["budget"]["recurrent"][category] = amount_value
+        message = bot.send_message(
+            chat_id, "Recurrent amount for " + category + f" is now: {budget_currency} " + amount_value
+        )
+        helper.write_json(user_list)
+
+        date_of_entry = datetime.today().strftime(helper.getDateFormat())
+
+        date_str, category_str, amount_str = (
+            str(date_of_entry),
+            str(category),
+            str(amount_value),
+        )
+
+        helper.write_json(
+            add.add_user_record(
+                chat_id, "{},{},{}".format(date_str, category_str, amount_str)
+            )
+        )
+        bot.send_message(
+            chat_id,
+            "The following expenditure has been recorded: You have spent {} {} for {} on {}".format(
+                helper.getOverallCurrency(chat_id), amount_str, category_str, date_str
+            ),
+        )
+        helper.display_remaining_budget(message, bot, category)
+        post_category_add(message, bot, "recurrent")
 
     except Exception as e:
         helper.throw_exception(e, message, bot, logging)
 
 
-def post_category_add(message, bot):
+def post_category_add(message, bot, option):
     """
     post_category_add(message, bot): It takes 2 arguments for processing -
     message which is the message from the user, and bot which is the telegram bot object.
@@ -234,9 +327,9 @@ def post_category_add(message, bot):
     for c in options:
         markup.add(c)
     msg = bot.reply_to(message, "Select Option", reply_markup=markup)
-    bot.register_next_step_handler(msg, post_option_selection, bot)
+    bot.register_next_step_handler(msg, post_option_selection, bot, option)
 
-def post_option_selection(message, bot):
+def post_option_selection(message, bot, option):
     """
     post_option_selection(message, bot): It takes 2 arguments for processing -
     message which is the message from the user, and bot which is the telegram bot object.
@@ -249,4 +342,5 @@ def post_option_selection(message, bot):
     options = helper.getUpdateOptions()
     print("here")
     if selected_option == options["continue"]:
-        update_category_budget(message, bot)
+        update_category_budget(message, bot, option)
+        
