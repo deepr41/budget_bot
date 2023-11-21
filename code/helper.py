@@ -14,9 +14,6 @@ spend_categories = [
     "Miscellaneous",
 ]
 
-recurrent_spend_categories = []
-recurrent_spend_categories.extend(spend_categories)
-
 choices = ["Date", "Category", "Cost"]
 spend_display_option = ["Day", "Month"]
 spend_estimate_option = ["Next day", "Next month"]
@@ -256,22 +253,25 @@ def display_remaining_category_budget(message, bot, cat):
     # if not getCategoryBudgetByCategory(chat_id,cat):
     #     updateBudgetCategory(chat_id, cat)
     remaining_budget = calculateRemainingCategoryBudget(chat_id, cat)
-    if remaining_budget >= 0:
-        msg = "\nRemaining Goal amount for " + cat + f" is {budget_currency} " + str(remaining_budget)
-        bot.send_message(chat_id, msg)
-    else:
-        rem_amount = ""
-        rem_amount = str(abs(remaining_budget))
-        notify(chat_id, cat, rem_amount, budget_currency)
+    if remaining_budget!=None:
+        if remaining_budget >= 0:
+            msg = "\nRemaining Goal amount for " + cat + f" is {budget_currency} " + str(remaining_budget)
+            bot.send_message(chat_id, msg)
+        else:
+            rem_amount = ""
+            rem_amount = str(abs(remaining_budget))
+            notify(chat_id, cat, rem_amount, budget_currency)
     
 
 def calculateRemainingCategoryBudget(chat_id, cat):
     budget = getCategoryBudgetByCategory(chat_id, cat)
-    history = getUserHistory(chat_id)
-    query = datetime.now().today().strftime(getMonthFormat())
-    queryResult = [value for _, value in enumerate(history) if str(query) in value]
-    return round(float(budget) - calculate_total_spendings_for_category(queryResult, cat), 2)
-
+    if budget!=None:
+        history = getUserHistory(chat_id)
+        query = datetime.now().today().strftime(getMonthFormat())
+        queryResult = [value for _, value in enumerate(history) if str(query) in value]
+        return round(float(budget) - calculate_total_spendings_for_category(queryResult, cat), 2)
+    else:
+        return budget
 def calculateRemainingCateogryBudgetPercent(chat_id, cat):
     budget = getCategoryBudgetByCategory(chat_id, cat)
     history = getUserHistory(chat_id)
@@ -333,12 +333,6 @@ def getSpendCategories():
     getSpendCategories(): This functions returns the spend categories used in the bot. These are defined the same file.
     """
     return spend_categories
-
-def getRecurrentCategories():
-    """
-    getRecurrentCategories(): This functions returns the recurrent spend categories used in the bot. These are defined the same file.
-    """
-    return recurrent_spend_categories
 
 def getSpendDisplayOptions():
     """

@@ -116,7 +116,7 @@ def update_category_budget(message, bot, op):
     and displays them to the user. It then passes control on to the post_category_selection function.
     """
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-    categories = helper.getSpendCategories() if op == "goal" else helper.getRecurrentCategories()
+    categories = helper.getSpendCategories() 
     markup.row_width = 2
     for c in categories:
         markup.add(c)
@@ -221,7 +221,7 @@ def add_new_spending(message,bot):
     markup.row_width = 2
     new_category = message.text
     helper.spend_categories.append(new_category)
-    for c in helper.getRecurrentCategories():
+    for c in helper.getSpendCategories():
         markup.add(c)
     msg = bot.reply_to(message, "Select Category", reply_markup=markup)
     bot.register_next_step_handler(msg, add_recurrent_spendings, bot)
@@ -237,7 +237,7 @@ def add_recurrent_spendings(message, bot):
             message1 = bot.send_message(chat_id, "Please enter your category")
             bot.register_next_step_handler(message1, add_new_spending, bot)
         else:
-            categories = helper.getRecurrentCategories()
+            categories = helper.getSpendCategories()
             if selected_category not in categories:
                 bot.send_message(
                     chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
@@ -245,7 +245,7 @@ def add_recurrent_spendings(message, bot):
                 raise Exception(
                     'Sorry I don\'t recognise this category "{}"!'.format(selected_category)
                 )
-            if helper.isRecurrentBudgetByCategoryAvailable(chat_id, selected_category):
+            if helper.isCategoryBudgetByCategoryAvailable(chat_id, selected_category):
                 currentBudget = helper.getRecurrentBudgetByCategory(
                     chat_id, selected_category
                 )
@@ -306,7 +306,7 @@ def post_recurrent_amount_input(message, bot, category):
                 helper.getOverallCurrency(chat_id), amount_str, category_str, date_str
             ),
         )
-
+        helper.display_remaining_budget(message, bot, category)
         post_category_add(message, bot, "recurrent")
 
     except Exception as e:
@@ -342,7 +342,5 @@ def post_option_selection(message, bot, option):
     options = helper.getUpdateOptions()
     print("here")
     if selected_option == options["continue"]:
-        if option == "goal":
-            update_category_budget(message, bot)
-        elif option == "recurrent":
-            add_recurrent_spendings(message, bot)
+        update_category_budget(message, bot, option)
+        
