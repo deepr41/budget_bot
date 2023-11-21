@@ -14,6 +14,7 @@ import add
 import budget
 import analytics
 import predict
+import schedule
 from datetime import datetime
 from jproperties import Properties
 
@@ -245,6 +246,37 @@ def addUserHistory(chat_id, user_record):
         user_list[str(chat_id)] = []
     user_list[str(chat_id)].append(user_record)
     return user_list
+
+
+
+def monthly_recurrent_expense():
+    categories = helper.getRecurrentCategories()
+    data = helper.read_json()
+    chat_id = list(data.keys())[0]
+    for cat in categories:
+        date_of_entry = datetime.today().strftime(helper.getDateFormat())  
+        amount_value = helper.recurrent_spend_categories[cat]
+
+        date_str, category_str, amount_str = (
+            str(date_of_entry),
+            str(chat_id),
+            str(amount_value),
+        )
+
+        helper.write_json(
+            add.add_user_record(
+                chat_id, "{},{},{}".format(date_str, category_str, amount_str)
+            )
+        )
+        bot.send_message(
+            chat_id,
+            "The following expenditure has been recorded: You have spent {} {} for {} on {}".format(
+                helper.getOverallCurrency(chat_id), amount_str, category_str, date_str
+            ),
+        )
+
+# Schedule the function to run on the 1st of every month
+schedule.every().month.at("00:00").do(monthly_recurrent_expense)
 
 def main():
     """

@@ -13,12 +13,16 @@ spend_categories = [
     "Shopping",
     "Miscellaneous",
 ]
+
+recurrent_spend_categories = []
+recurrent_spend_categories.extend(spend_categories)
+
 choices = ["Date", "Category", "Cost"]
 spend_display_option = ["Day", "Month"]
 spend_estimate_option = ["Next day", "Next month"]
 update_options = {"continue": "Continue", "exit": "Exit"}
 budget_options = {"update": "Add/Update", "view": "View", "delete": "Delete"}
-budget_types = {"overall": "Overall Budget", "goal": "Category-Wise Goal"}
+budget_types = {"overall": "Overall Budget", "goal": "Category-Wise Goal", "recurrent": "Recurrent spendings"}
 data_format = {"expense": [], "income": [], "budget": {"budget": 0, "currency": "USD", "goal": {}, "recurrent": {}, "saving": 0}}
 analytics_options = {"overall": "Overall budget split", "spend": "Split of current spend", "remaining": "Remaining value", "history": "Time series graph of spend history"}
 
@@ -156,10 +160,22 @@ def getCategoryBudget(chatId):
         return None
     return data["budget"]["goal"]
 
+def getRecurrentBudget(chatId):
+    data = getUserData(chatId)
+    if data is None:
+        return None
+    return data["budget"]["recurrent"]
+
 def getCategoryBudgetByCategory(chatId, cat):
     if not isCategoryBudgetByCategoryAvailable(chatId, cat):
         return None
     data = getCategoryBudget(chatId)
+    return data[cat]
+
+def getRecurrentBudgetByCategory(chatId, cat):
+    if not isRecurrentBudgetByCategoryAvailable(chatId, cat):
+        return None
+    data = getRecurrentBudget(chatId)
     return data[cat]
 
 def canAddBudget(chatId):
@@ -181,6 +197,12 @@ def isCategoryBudgetAvailable(chatId):
 
 def isCategoryBudgetByCategoryAvailable(chatId, cat):
     data = getCategoryBudget(chatId)
+    if data is None or data == {}:
+        return False
+    return cat in data.keys()
+
+def isRecurrentBudgetByCategoryAvailable(chatId, cat):
+    data = getRecurrentBudget(chatId)
     if data is None or data == {}:
         return False
     return cat in data.keys()
@@ -311,6 +333,12 @@ def getSpendCategories():
     getSpendCategories(): This functions returns the spend categories used in the bot. These are defined the same file.
     """
     return spend_categories
+
+def getRecurrentCategories():
+    """
+    getRecurrentCategories(): This functions returns the recurrent spend categories used in the bot. These are defined the same file.
+    """
+    return recurrent_spend_categories
 
 def getSpendDisplayOptions():
     """
