@@ -36,8 +36,9 @@ def display_overall_budget(message, bot):
     user based on their chat ID using the helper module and returns the same through the bot to the Telegram UI.
     """
     chat_id = message.chat.id
-    data, currency = helper.getOverallBudget(chat_id)
-    bot.send_message(chat_id, f"Overall Budget: {currency} " + data)
+    budget_currency = helper.getOverallCurrency(chat_id)
+    data = helper.getOverallBudget(chat_id)
+    bot.send_message(chat_id, f"Overall Budget: {budget_currency} " + data)
 
 def display_category_budget(message, bot):
     """

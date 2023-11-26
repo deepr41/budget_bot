@@ -13,13 +13,75 @@ spend_categories = [
     "Shopping",
     "Miscellaneous",
 ]
+transaction_type = [
+    "New",
+    "Old",
+    "Repeat existing"
+]
+day = {
+    '1' :  1,
+    '2' :  2,
+    '3' :  3,
+    '4' :  4,
+    '5' :  5,
+    '6' :  6,
+    '7' :  7,
+    '8' :  8,
+    '9' :  9,
+    '10' : 10,
+    '11' : 11,
+    '12' : 12,
+    '13' : 13,
+    '14' : 14,
+    '15' : 15,
+    '16' : 16,
+    '17' : 17,
+    '18' : 18,
+    '19' : 19,
+    '20' : 20,
+    '21' : 21,
+    '22' : 22,
+    '23' : 23,
+    '24' : 24,
+    '25' : 25,
+    '26' : 26,
+    '27' : 27,
+    '28' : 28,
+    '29' : 29,
+    '30' : 30,
+    '31' : 31,
+}
+
+months = {
+    'Jan' : 'Jan',
+    'Feb' : 'Feb',
+    'Mar' : 'Mar',
+    'Apr' : 'Apr',
+    'May' : 'May',
+    'Jun' : 'Jun',
+    'Jul' : 'Jul',
+    'Aug' : 'Aug',
+    'Sep' : 'Sep',
+    'Oct' : 'Oct',
+    'Nov' : 'Nov',
+    'Dec' : 'Dec'
+}
+year = {
+        '2023' : '2023',
+        '2022' : '2022',
+        '2021' : '2021',
+        '2020' : '2020',
+        '2019' : '2019',
+        '2018' : '2018',
+        '2017' : '2017'
+    }
 choices = ["Date", "Category", "Cost"]
 spend_display_option = ["Day", "Month"]
 spend_estimate_option = ["Next day", "Next month"]
 update_options = {"continue": "Continue", "exit": "Exit"}
 budget_options = {"update": "Add/Update", "view": "View", "delete": "Delete"}
-budget_types = {"overall": "Overall Budget", "category": "Category-Wise Budget"}
-data_format = {"data": [], "budget": {"overall": None, "currency": None, "category": None}}
+budget_types = {"overall": "Overall Budget", "goal": "Category-Wise Goal", "recurrent": "Recurrent spendings"}
+data_format = {"expense": [], "income": [], "budget": {"budget": 0, "currency": "USD", "goal": {}, "recurrent": {}, "saving": 0}}
 analytics_options = {"overall": "Overall budget split", "spend": "Split of current spend", "remaining": "Remaining value", "history": "Time series graph of spend history"}
 
 # set of implemented commands and their description
@@ -94,13 +156,25 @@ def validate_entered_amount(amount_entered):
             return str(amount)
     return 0
 
+def currency_convertor(chat_id, expense_currency, value):
+    budget_currency = getOverallCurrency(chat_id)
+    c = CurrencyRates()
+    exchange_rate = c.get_rate(expense_currency, budget_currency)
+    return round(value * exchange_rate, 2)
+
+def getOverallCurrency(chat_id):
+    data = getUserData(chat_id)  
+    if not data:
+        return 'USD'
+    return data["budget"]["currency"]
+
 def getUserHistory(chat_id):
     """
     getUserHistory(chat_id): Takes 1 argument chat_id and uses this to get the relevant user's historical data.
     """
     data = getUserData(chat_id)
     if data is not None:
-        return data["data"]
+        return data["expense"]
     return None
 
 def getUserHistoryByCategory(chat_id, category):
@@ -138,13 +212,19 @@ def getOverallBudget(chatId):
     data = getUserData(chatId)
     if data is None or data == {}:
         return None
-    return data["budget"]["overall"], data["budget"]["currency"]
+    return data["budget"]["budget"]
 
 def getCategoryBudget(chatId):
     data = getUserData(chatId)
     if data is None:
         return None
-    return data["budget"]["category"]
+    return data["budget"]["goal"]
+
+def getRecurrentBudget(chatId):
+    data = getUserData(chatId)
+    if data is None:
+        return None
+    return data["budget"]["recurrent"]
 
 def getCategoryBudgetByCategory(chatId, cat):
     if not isCategoryBudgetByCategoryAvailable(chatId, cat):
@@ -152,13 +232,19 @@ def getCategoryBudgetByCategory(chatId, cat):
     data = getCategoryBudget(chatId)
     return data[cat]
 
+def getRecurrentBudgetByCategory(chatId, cat):
+    if not isRecurrentBudgetByCategoryAvailable(chatId, cat):
+        return None
+    data = getRecurrentBudget(chatId)
+    return data[cat]
+
 def canAddBudget(chatId):
-    overall_budget, currency = getOverallBudget(chatId)
+    overall_budget = getOverallBudget(chatId)
     category_budget = getCategoryBudget(chatId)
     return (overall_budget is None and overall_budget != '0') and (category_budget is None and category_budget != {})
 
 def isOverallBudgetAvailable(chatId):
-    overall_budget, currency = getOverallBudget(chatId)
+    overall_budget = getOverallBudget(chatId)
     if overall_budget is not None and overall_budget != '0':
         return True
     return False
@@ -175,6 +261,12 @@ def isCategoryBudgetByCategoryAvailable(chatId, cat):
         return False
     return cat in data.keys()
 
+def isRecurrentBudgetByCategoryAvailable(chatId, cat):
+    data = getRecurrentBudget(chatId)
+    if data is None or data == {}:
+        return False
+    return cat in data.keys()
+
 def get_uncategorized_amount(chatId, amount):
     overall_budget = float(amount)
     category_budget_data = getCategoryBudget(chatId)
@@ -187,102 +279,86 @@ def get_uncategorized_amount(chatId, amount):
     return str(round(uncategorized_budget,2))
 
 def display_remaining_budget(message, bot, cat):
-    print("inside")
     chat_id = message.chat.id
     display_remaining_category_budget(message, bot, cat)
     display_remaining_overall_budget(message, bot)
 
 def display_remaining_overall_budget(message, bot):
     chat_id = message.chat.id
-    remaining_budget, currency = calculateRemainingOverallBudget(chat_id)
+    remaining_budget = calculateRemainingOverallBudget(chat_id)
+    budget_currency = getOverallCurrency(chat_id)
     print("here", remaining_budget)
     if remaining_budget >= 0:
-        msg = f"\nRemaining Overall Budget is {currency} " + str(remaining_budget)
+        msg = f"\nRemaining Overall Budget is {budget_currency} " + str(remaining_budget)
     else:
         msg = (
-            f"\nBudget Exceded!\nExpenditure exceeds the budget by {currency} " + str(remaining_budget)[1:]
+            f"\nBudget Exceded!\nExpenditure exceeds the budget by {budget_currency} " + str(remaining_budget)[1:]
         )
     bot.send_message(chat_id, msg)
 
 def calculateRemainingOverallBudget(chat_id):
-    budget, currency = getOverallBudget(chat_id)
+    budget = getOverallBudget(chat_id)
     history = getUserHistory(chat_id)
     query = datetime.now().today().strftime(getMonthFormat())
-    print("=================")
-    print(query)
     queryResult = [value for _, value in enumerate(history) if str(query) in value]
-    print(queryResult)
-    return float(budget) - calculate_total_spendings(queryResult, chat_id), currency
+    return round(float(budget) - calculate_total_spendings(queryResult), 2)
 
-def calculate_total_spendings(queryResult, chatId):
-    overall_budget, currency = getOverallBudget(chatId)
+def calculate_total_spendings(queryResult):
     total = 0
     for row in queryResult:
         s = row.split(",")
-        if currency == s[3]:
-            total = total + float(s[2])
-        else:
-            value = currency_convertor(currency, s[3], float(s[2]))
-            total = total + value
-    return round(total,2)
-
-def currency_convertor(budget_currency, expense_currency, value):
-    c = CurrencyRates()
-    exchange_rate = c.get_rate(expense_currency, budget_currency)
-    return value * exchange_rate
+        total = total + float(s[2])
+    return total
 
 def display_remaining_category_budget(message, bot, cat):
     chat_id = message.chat.id
-    _, overall_currency = getOverallBudget(chat_id)
-    if not getCategoryBudgetByCategory(chat_id,cat):
-        updateBudgetCategory(chat_id, cat)
-    remaining_budget, currency = calculateRemainingCategoryBudget(chat_id, cat)
-    if remaining_budget >= 0:
-        msg = "\nRemaining Budget for " + cat + f" is {currency} " + str(remaining_budget)
-    else:
-        rem_amount = ""
-        rem_amount = currency_convertor(overall_currency, currency, abs(remaining_budget))
-        notify(chat_id, cat, rem_amount, overall_currency)
-        msg = "\nRemaining Budget for " + cat + f" is {currency} " + str(remaining_budget)
-    bot.send_message(chat_id, msg)
+    budget_currency = getOverallCurrency(chat_id)
+    # if not getCategoryBudgetByCategory(chat_id,cat):
+    #     updateBudgetCategory(chat_id, cat)
+    remaining_budget = calculateRemainingCategoryBudget(chat_id, cat)
+    if remaining_budget!=None:
+        if remaining_budget >= 0:
+            msg = "\nRemaining Goal amount for " + cat + f" is {budget_currency} " + str(remaining_budget)
+            bot.send_message(chat_id, msg)
+        else:
+            rem_amount = ""
+            rem_amount = str(abs(remaining_budget))
+            notify(chat_id, cat, rem_amount, budget_currency)
+    
 
 def calculateRemainingCategoryBudget(chat_id, cat):
     budget = getCategoryBudgetByCategory(chat_id, cat)
-    _, currency = getOverallBudget(chat_id)
-    history = getUserHistory(chat_id)
-    query = datetime.now().today().strftime(getMonthFormat())
-    queryResult = [value for _, value in enumerate(history) if str(query) in value]
-    return float(budget) - calculate_total_spendings_for_category(queryResult, cat, chat_id), currency
-
+    if budget!=None:
+        history = getUserHistory(chat_id)
+        query = datetime.now().today().strftime(getMonthFormat())
+        queryResult = [value for _, value in enumerate(history) if str(query) in value]
+        return round(float(budget) - calculate_total_spendings_for_category(queryResult, cat), 2)
+    else:
+        return budget
 def calculateRemainingCateogryBudgetPercent(chat_id, cat):
     budget = getCategoryBudgetByCategory(chat_id, cat)
     history = getUserHistory(chat_id)
     query = datetime.now().today().strftime(getMonthFormat())
     queryResult = [value for _, value in enumerate(history) if str(query) in value]
-    return (calculate_total_spendings_for_category(queryResult, cat, chat_id)/float(budget))*100
+    return (calculate_total_spendings_for_category(queryResult, cat)/float(budget))*100
 
-def calculate_total_spendings_for_category(queryResult, cat, chatId):
-    _, currency = getOverallBudget(chatId)
+def calculate_total_spendings_for_category(queryResult, cat):
     total = 0
     for row in queryResult:
         s = row.split(",")
         if cat == s[1]:
-            if currency == s[3]:
-                total = total + float(s[2])
-            else:
-                value = currency_convertor(currency, s[3], float(s[2]))
-                total = total + value
-    return round(total,2)
+            total = total + float(s[2])
+    return total
 
 def calculate_total_spendings_for_cateogory_chat_id(chat_id, cat):
     history = getUserHistory(chat_id)
     query = datetime.now().today().strftime(getMonthFormat())
     queryResult = [value for _, value in enumerate(history) if str(query) in value]
-    return calculate_total_spendings_for_category(queryResult, cat, chat_id)
+    return calculate_total_spendings_for_category(queryResult, cat)
 
 def updateBudgetCategory(chatId, category):
     user_list = read_json()
-    user_list[str(chatId)]["budget"]["category"][category] = str(0)
+    user_list[str(chatId)]["budget"]["goal"][category] = str(0)
     write_json(user_list)
 
 def getAvailableCategories(history):
@@ -365,6 +441,18 @@ def getBudgetTypes():
 
 def getUpdateOptions():
     return update_options
+
+def getTransactionTypes():
+    return transaction_type
+
+def getDaysList():
+    return day
+
+def getMonthsList():
+    return months
+
+def getYearList():
+    return year
 
 def getAnalyticsOptions():
     return analytics_options
