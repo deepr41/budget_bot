@@ -15,6 +15,7 @@ import budget
 import analytics
 import predict
 import schedule
+import advisor
 from datetime import date, datetime
 from jproperties import Properties
 
@@ -71,6 +72,7 @@ bot.set_update_listener(listener)
 custom_commands = [
     ("/menu", "Show the main menu"),
     ("/add", "Add an expense"),
+    ("/advisor", "Your personal advisor"),
     ("/pdf", "Generate a PDF report"),
     ("/history", "View expenditure history"),
     ("/edit", "Edit a transaction"),
@@ -247,6 +249,12 @@ def addUserHistory(chat_id, user_record):
     user_list[str(chat_id)].append(user_record)
     return user_list
 
+@bot.message_handler(commands=["advisor"])
+def command_advisor(message):
+    """
+    advisor(message): Integrates with openai
+    """
+    advisor.run(message, bot)
 
 def monthly_recurrent_expense():
     if date.today().day != 1:
