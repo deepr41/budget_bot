@@ -164,6 +164,8 @@ def currency_convertor(chat_id, expense_currency, value):
 
 def getOverallCurrency(chat_id):
     data = getUserData(chat_id)  
+    if not data:
+        return 'USD'
     return data["budget"]["currency"]
 
 def getUserHistory(chat_id):
