@@ -133,4 +133,5 @@ dmypy.json
 
 # Generated files
 expense_record.json
+setenv.sh
 user.properties
