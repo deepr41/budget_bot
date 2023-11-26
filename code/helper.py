@@ -13,7 +13,68 @@ spend_categories = [
     "Shopping",
     "Miscellaneous",
 ]
+transaction_type = [
+    "New",
+    "Old",
+    "Repeat existing"
+]
+day = {
+    '1' :  1,
+    '2' :  2,
+    '3' :  3,
+    '4' :  4,
+    '5' :  5,
+    '6' :  6,
+    '7' :  7,
+    '8' :  8,
+    '9' :  9,
+    '10' : 10,
+    '11' : 11,
+    '12' : 12,
+    '13' : 13,
+    '14' : 14,
+    '15' : 15,
+    '16' : 16,
+    '17' : 17,
+    '18' : 18,
+    '19' : 19,
+    '20' : 20,
+    '21' : 21,
+    '22' : 22,
+    '23' : 23,
+    '24' : 24,
+    '25' : 25,
+    '26' : 26,
+    '27' : 27,
+    '28' : 28,
+    '29' : 29,
+    '30' : 30,
+    '31' : 31,
+}
 
+months = {
+    'Jan' : 'Jan',
+    'Feb' : 'Feb',
+    'Mar' : 'Mar',
+    'Apr' : 'Apr',
+    'May' : 'May',
+    'Jun' : 'Jun',
+    'Jul' : 'Jul',
+    'Aug' : 'Aug',
+    'Sep' : 'Sep',
+    'Oct' : 'Oct',
+    'Nov' : 'Nov',
+    'Dec' : 'Dec'
+}
+year = {
+        '2023' : '2023',
+        '2022' : '2022',
+        '2021' : '2021',
+        '2020' : '2020',
+        '2019' : '2019',
+        '2018' : '2018',
+        '2017' : '2017'
+    }
 choices = ["Date", "Category", "Cost"]
 spend_display_option = ["Day", "Month"]
 spend_estimate_option = ["Next day", "Next month"]
@@ -103,6 +164,8 @@ def currency_convertor(chat_id, expense_currency, value):
 
 def getOverallCurrency(chat_id):
     data = getUserData(chat_id)  
+    if not data:
+        return 'USD'
     return data["budget"]["currency"]
 
 def getUserHistory(chat_id):
@@ -378,6 +441,18 @@ def getBudgetTypes():
 
 def getUpdateOptions():
     return update_options
+
+def getTransactionTypes():
+    return transaction_type
+
+def getDaysList():
+    return day
+
+def getMonthsList():
+    return months
+
+def getYearList():
+    return year
 
 def getAnalyticsOptions():
     return analytics_options
