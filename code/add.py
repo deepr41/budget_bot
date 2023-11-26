@@ -222,26 +222,32 @@ def post_expense_selection(message,bot,date_of_entry):
     expense_data = expense_record.split(",")
     amount = expense_data[2]
     category = expense_data[1]
-    currency = expense_data[3]
     print(amount)
     amount_value = helper.validate_entered_amount(amount)  # validate
+    currency = helper.getOverallCurrency(chat_id)
     try:
         if amount_value == 0:  # cannot be $0 spending
             raise Exception("Spent amount has to be a non-zero number.")
+
+        # date_of_entry = datetime.today().strftime(helper.getDateFormat())
+
+        amount_value = helper.currency_convertor(chat_id, currency, float(amount_value))
+
         date_str, category_str, amount_str = (
             str(date_of_entry),
             str(category),
             str(amount_value),
         )
+
         helper.write_json(
             add_user_record(
-                chat_id, "{},{},{}".format(date_str, category_str, amount_str, currency)
+                chat_id, "{},{},{}".format(date_str, category_str, amount_str)
             )
         )
         bot.send_message(
             chat_id,
             "The following expenditure has been recorded: You have spent {} {} for {} on {}".format(
-                currency, amount_str, category_str, date_str
+                helper.getOverallCurrency(chat_id), amount_str, category_str, date_str
             ),
         )
         helper.display_remaining_budget(message, bot, category)
@@ -268,20 +274,28 @@ def post_amount_input(message, bot, selected_category, selected_currency, date_o
         amount_value = helper.validate_entered_amount(amount_entered)  # validate
         if amount_value == 0:  # cannot be $0 spending
             raise Exception("Spent amount has to be a non-zero number.")
+
+        # date_of_entry = datetime.today().strftime(
+        #     helper.getDateFormat())
+        
+        amount_value = helper.currency_convertor(chat_id, selected_currency, float(amount_value))
+
+
         date_str, category_str, amount_str = (
             str(date_of_entry),
             str(option[chat_id]),
             str(amount_value),
         )
+
         helper.write_json(
             add_user_record(
-                chat_id, "{},{},{},{}".format(date_str, category_str, amount_str, selected_currency)
+                chat_id, "{},{},{}".format(date_str, category_str, amount_str)
             )
         )
         bot.send_message(
             chat_id,
             "The following expenditure has been recorded: You have spent {} {} for {} on {}".format(
-                selected_currency,amount_str, category_str, date_str
+                helper.getOverallCurrency(chat_id), amount_str, category_str, date_str
             ),
         )
         # TODO: @Deepak Post adding expense metrics
@@ -304,7 +318,7 @@ def add_user_record(chat_id, record_to_be_added):
     if str(chat_id) not in user_list:
         user_list[str(chat_id)] = helper.createNewUserRecord()
 
-    user_list[str(chat_id)]["data"].append(f"{record_to_be_added}")
+    user_list[str(chat_id)]["expense"].append(f"{record_to_be_added}")
     print("!" * 5)
     print("after")
     print(user_list)
