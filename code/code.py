@@ -11,7 +11,7 @@ import display
 import estimate
 import delete
 import add
-import budget
+import goal
 import income
 import analytics
 import predict
@@ -80,7 +80,7 @@ custom_commands = [
     ("/display", "Display total expenditure"),
     ("/estimate", "Estimate future expenditure"),
     ("/delete", "Delete a transaction"),
-    ("/budget", "Manage your budget"),
+    ("/goal", "Manage your Goals"),
     ("/analytics", "View analytics"),
     ("/predict", "Predict future budget"),
     ("/help", "Show available commands"),
@@ -222,9 +222,9 @@ def command_delete(message):
     delete.run(message, bot)
 
 # handles budget command
-@bot.message_handler(commands=["budget"])
+@bot.message_handler(commands=["goal"])
 def command_budget(message):
-    budget.run(message, bot)
+    goal.run(message, bot)
 
 # handles income command
 @bot.message_handler(commands=["income"])
