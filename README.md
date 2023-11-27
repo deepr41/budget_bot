@@ -25,7 +25,7 @@
 - [Installation and Setup](#installation-and-setup)
 - [How to use?](#how-to-use)
 - [Contributors](#contributors)
-- [Future Work](#future-work)
+- [Future Scope](#future-scope)
 - [Acknowledgements](#acknowledgements)
 
 
@@ -160,7 +160,7 @@ Here's a quick overview of how each of the commands work. Simply enter /<command
 #### /add: This option is for adding your expenses        
  1. It will give you the list of categories to choose from.        
  2. You will be prompted to enter the amount corresponding to your spending        
- 3.The message will be prompted to notify the addition of your expense with the amount,date, time and category 
+ 3. The message will be prompted to notify the addition of your expense with the amount,date, time and category 
 
 #### /analytics: This option gives user a graphical representation of their expenditures         
  You will get an option to choose the type of data you want to see.
@@ -180,18 +180,7 @@ Here's a quick overview of how each of the commands work. Simply enter /<command
  2. The view category gives the detail if budget is exceeding or in limit with the difference amount         
  3. The delete category allows to delete the budget and start afresh!
 
-## Contributors
-
-  <table>
-  <tr>
-    <td align="center"><a href="https://github.com/deepr41"><img src="https://avatars.githubusercontent.com/deepr41" width="100px;" alt=""/><br /><b>Deepak Rajendran</b></a></td>
-    <td align="center"><a href="https://github.com/shafa112"><img src="https://avatars.githubusercontent.com/shafa112" width="100px;" alt=""/><br /><b>Shafa Hassan</b></a><br /></td>
-    <td align="center"><a href="https://github.com/Janhavi-23"><img src="https://avatars.githubusercontent.com/Janhavi-23" width="100px;" alt=""/><br /><b>Janhavi Pendse</b></a><br /></td>
-    <td align="center"><a href="https://github.com/deepp2905"><img src="https://avatars.githubusercontent.com/deepp2905" width="100px;" alt=""/><br /><b>Deep Patel</b></a><br /></td>
-  </tr>
-</table>
-
-## Future Work
+## Future Scope
 
 - Sharing expenses
 - Windows specific setup scripts
@@ -208,3 +197,15 @@ Here's a quick overview of how each of the commands work. Simply enter /<command
 - Our sincere thanks are also extended to the [previous team](https://github.com/aditikilledar/dollar_bot_SE23) for providing a comprehensive ReadMe and detailed documentation, which has proven instrumental in our understanding and progress 😊.
 
 - Lastly, a special acknowledgment goes to the Telegram bot, accessible at [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot), for its major contribution to our project.
+
+## Contributors
+
+  <table>
+  <tr>
+    <td align="center"><a href="https://github.com/deepr41"><img src="https://avatars.githubusercontent.com/deepr41" width="100px;" alt=""/><br /><b>Deepak Rajendran</b></a></td>
+    <td align="center"><a href="https://github.com/shafa112"><img src="https://avatars.githubusercontent.com/shafa112" width="100px;" alt=""/><br /><b>Shafa Hassan</b></a><br /></td>
+    <td align="center"><a href="https://github.com/Janhavi-23"><img src="https://avatars.githubusercontent.com/Janhavi-23" width="100px;" alt=""/><br /><b>Janhavi Pendse</b></a><br /></td>
+    <td align="center"><a href="https://github.com/deepp2905"><img src="https://avatars.githubusercontent.com/deepp2905" width="100px;" alt=""/><br /><b>Deep Patel</b></a><br /></td>
+  </tr>
+</table>
+
