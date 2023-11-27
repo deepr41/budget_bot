@@ -2,7 +2,7 @@
 code.py is the main file from where calls to the corresponding .py files for all features are sent. It contains a number of endpoints which redirect to function calls in the corresponding files. 
 
 # Location of Code for this Feature
-The code that implements this feature can be found [here](https://github.com/deep41/budget_bot/blob/main/code/code.py)
+The code that implements this feature can be found [here](https://github.com/deepr41/budget_bot/blob/main/code/code.py)
 
 # Code Description
 ## Functions
