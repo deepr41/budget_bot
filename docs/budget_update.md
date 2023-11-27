@@ -44,5 +44,18 @@ It takes 2 arguments for processing - **message** which is the message from the 
 It takes the category chosen by the user from the message object. If the message is "continue", then it runs update_category_budget (above) allowing the user to get into the add/update process again.
 Otherwise, it exits the feature.
 
+10. update_savings_budget(message, bot):
+It takes 2 arguments for processing - **message** which is the message from the user, and **bot** which is the telegram bot object.
+It prompts user to add savings amount and redirects to post_overall_savings_input
+
+11. post_overall_savings_input(message, bot):
+It takes savings amount and updates values of overall budget and savings in db
+
+12. add_recurrent_spendings(message, bot):
+It promts user to add new recurrent spendings and ask for category
+
+13. post_recurrent_amount_input(message, bot, category):
+Based on above selection new recurrenct amount is added in db and immadiately new expense for the same will be created. Henceforth this recurrenct expense will be created every 1st of month
+
 # How to run this feature?
 Once the project is running(please follow the instructions given in the main README.md for this), please type /budget into the telegram bot. Please follow the prompts on the screen to create a new budget.
