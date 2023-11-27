@@ -18,7 +18,7 @@ def run(message, bot):
     if str(chat_id) in user_list:
         user_list[str(chat_id)]["budget"]["budget"] = str(0)
         user_list[str(chat_id)]["budget"]["goal"] = {}
-        user_list[str(chat_id)]["budget"]["saving"] = str(0)
+        user_list[str(chat_id)]["budget"]["savings"] = str(0)
         user_list[str(chat_id)]["budget"]["recurrent"] = {}
         user_list[str(chat_id)]["budget"]["currency"] = "USD"
         helper.write_json(user_list)

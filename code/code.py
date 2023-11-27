@@ -12,6 +12,7 @@ import estimate
 import delete
 import add
 import budget
+import income
 import analytics
 import predict
 import schedule
@@ -84,6 +85,7 @@ custom_commands = [
     ("/predict", "Predict future budget"),
     ("/help", "Show available commands"),
     ("/faq", "Frequently Asked Questions"),
+    ("/income", "Add income from different sources"),
 ]
 
 # Convert custom commands to BotCommand objects
@@ -223,6 +225,15 @@ def command_delete(message):
 @bot.message_handler(commands=["budget"])
 def command_budget(message):
     budget.run(message, bot)
+
+# handles income command
+@bot.message_handler(commands=["income"])
+def command_income(message):
+    income.run(message, bot)
+
+@bot.message_handler(commands=["savings"])
+def command_savings(message):
+    savings.run(message, bot)
 
 # handles analytics command
 @bot.message_handler(commands=["analytics"])

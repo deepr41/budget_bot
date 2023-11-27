@@ -38,7 +38,7 @@ def display_overall_budget(message, bot):
     chat_id = message.chat.id
     budget_currency = helper.getOverallCurrency(chat_id)
     data = helper.getOverallBudget(chat_id)
-    bot.send_message(chat_id, f"Overall Budget: {budget_currency} " + data)
+    bot.send_message(chat_id, "Overall Budget: " + str(data)+" "+budget_currency)
 
 def display_category_budget(message, bot):
     """

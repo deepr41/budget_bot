@@ -7,6 +7,8 @@ import add
 
 # === Documentation of budget_update.py ===
 
+option = {}
+
 def run(message, bot):
     """
     run(message, bot): This is the main function used to implement the budget add/update features.
@@ -43,6 +45,8 @@ def post_type_selection(message, bot):
             update_category_budget(message, bot, "goal")
         elif op == options["recurrent"]:
             update_category_budget(message, bot, "recurrent")
+        elif op == options["savings"]:
+            update_savings_budget(message, bot)
     except Exception as e:
         helper.throw_exception(e, message, bot, logging)
 
@@ -67,6 +71,37 @@ def update_overall_budget(chat_id, bot):
             chat_id, "How much is your monthly budget? \n(Enter numeric values only)"
         )
     bot.register_next_step_handler(message, post_overall_amount_input, bot)
+
+def update_savings_budget(message, bot):
+    chat_id = message.chat.id
+    option[chat_id]=message.text
+    msg = bot.send_message(
+            chat_id, "Add savings amount {} \n".format(str(option[chat_id]))
+        )
+    bot.register_next_step_handler(message, post_overall_savings_input, bot)
+
+def post_overall_savings_input(message,bot):
+    chat_id = message.chat.id
+    savings_entered = message.text
+    if float(helper.getOverallBudget(chat_id)) < float(savings_entered):
+        bot.send_message(chat_id, "Savings cannot be more than budget:" + str(helper.getOverallBudget(chat_id)))
+        raise Exception("Savings cannot be more than budget:" + str(helper.getOverallBudget(chat_id)))
+    
+    chat_id = message.chat.id
+    user_list = helper.read_json()
+    if str(chat_id) not in user_list:
+            user_list[str(chat_id)] = helper.createNewUserRecord()
+    user_list[str(chat_id)]["budget"]["savings"] = savings_entered
+    helper.write_json(user_list)
+
+    user_list = helper.read_json()
+    if str(chat_id) not in user_list:
+            user_list[str(chat_id)] = helper.createNewUserRecord()
+    overall=user_list[str(chat_id)]["budget"]["budget"]
+    user_list[str(chat_id)]["budget"]["budget"] = float(overall)-float(savings_entered)
+    helper.write_json(user_list)
+    bot.send_message(chat_id, "Budget Updated!")
+
 
 def post_overall_amount_input(message, bot):
     """
