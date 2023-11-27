@@ -2,7 +2,7 @@
 This feature enables the user to delete all of their saved records till date in their expense tracker.
 
 # Location of Code for this Feature
-The code that implements this feature can be found [here](https://github.com/deep41/budget_bot/blob/main/code/delete.py)
+The code that implements this feature can be found [here](https://github.com/deepr41/budget_bot/blob/main/code/delete.py)
 
 # Code Description
 ## Functions
