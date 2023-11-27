@@ -2,7 +2,7 @@
 The budget_view module contains all the functions required to implement the display add and update features. In essence, all operations involved in addition of a new budget and updating an existing budget are taken care of in this module and are implemented here. 
 
 # Location of Code for this Feature
-The code that implements this feature can be found [here](https://github.com/aditikilledar/dollar_bot_SE23/blob/main/code/budget_update.py)
+The code that implements this feature can be found [here](https://github.com/deepr41/budget_bot/blob/main/code/budget_update.py)
 
 # Code Description
 ## Functions
