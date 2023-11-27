@@ -1,10 +1,10 @@
-# 💰 Dollar Bot 💰
+# 💰 Budget Bot 💰
 
 <!-- TABLE OF CONTENTS -->
 <b><h3>Table of Contents</h3></b>
   <ol>
-    <li><a href="#whats-dollarbot">What's DollarBot?
-    <li><a href="#why-use-dollarbot">Why use DollarBot?</a></li>
+    <li><a href="#whats-budgetbot">What's BudgetBot?
+    <li><a href="#why-use-dollarbot">Why use BudgetBot?</a></li>
     <li><a href="#demo">Demo</a></li>
     <li><a href="#whats-new">What's new in this version?</a></li>
     <li><a href="#installation-and-setup">Installation and Setup</a></li>
@@ -14,12 +14,12 @@
    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 
-Are you a developer? <a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/Developer_ReadMe.md">Click here: For Developers and Future Contributors</a>
+Are you a developer? <a href="https://github.com/deepr41/budget_bot/blob/main/Developer_ReadMe.md">Click here: For Developers and Future Contributors</a>
 
 ![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
 [![Platform](https://img.shields.io/badge/Platform-Telegram-blue)](https://desktop.telegram.org/)
 ![GitHub](https://img.shields.io/badge/Language-Python-blue.svg)
-[![GitHub contributors](https://img.shields.io/github/contributors/aditikilledar/dollar_bot_SE23)](https://github.com/aditikilledar/dollar_bot_SE23/graphs/contributors)
+[![GitHub contributors](https://img.shields.io/github/contributors/aditikilledar/dollar_bot_SE23)](https://github.com/deepr41/budget_bot/graphs/contributors)
 [![DOI](https://zenodo.org/badge/691334031.svg)](https://zenodo.org/doi/10.5281/zenodo.10023639)
 [![Build Status](https://app.travis-ci.com/usmanwardag/dollar_bot.svg?branch=main)](https://app.travis-ci.com/usmanwardag/dollar_bot)
 [![codecov](https://codecov.io/gh/aditikilledar/dollar_bot_SE23/graph/badge.svg?token=23RW1XPB3P)](https://codecov.io/gh/aditikilledar/dollar_bot_SE23)
@@ -28,25 +28,29 @@ Are you a developer? <a href="https://github.com/aditikilledar/dollar_bot_SE23/b
 
 <hr>
 
-## What's DollarBot?
+## What's BudgetBot?
 
-DollarBot is a handy little bot built on top of Telegram, to help you with daily expense tracking and analytics on your past spends. 
+BudgetBot is a handy little bot built on top of Telegram, to help you with daily expense tracking and analytics on your past spends. 
 
 It's easy to setup, run and use on a daily basis!
 
 <a href="https://www.canva.com/design/DAFxwU4ABIg/LqMkLeGUBhC__JmWmdkFiQ/watch?utm_content=DAFxwU4ABIg&utm_campaign=designshare&utm_medium=link&utm_source=editor">Click here for a video overview!!</a>
 
-## Why use DollarBot?
+## Why use BudgetBot?
 
 With simple in-chat commands, this bot helps you:
 - Set your own customized budget
 - Add/Record new spendings
+- Add your income from different sources
+- Add recurrant spendings
+- Add your monthly savings
 - Display your spending trends through engaging graphs
 - Predict your next month's budget based on your current expenditure
 - Display your spending history
 - Clear/Erase all your records
 - Edit/Change any spending details if you wish to
 - View Analytics and export as a pdf
+- Use OpenAI tools for analysis and tips on expense management
 
 ## Demo
 
@@ -54,21 +58,22 @@ Demo Video -> [https://www.youtube.com/watch?v=XlndmRhr9Lc]
 
 ## What's new?
 
-We've considerably extended this project to make using DollarBot easy and engaging.\
+We've considerably extended this project to make using BudgetBot easy and engaging.\
 1. Expressive Graphs
 2. Budget prediction
 3. Clearer and more informative PDF Reports
 4. Ability to add recurring expenses
 5. Budget Creation Updated
 6. Clearer wording in the documentation
+7. Integrated OpenAI API to help with analysis and tips
 
-Check [this documentation out](https://github.com/aditikilledar/dollar_bot_SE23/blob/main/docs/whats-new.md) for an in-depth depiction of our changes. :)
+Check [this documentation out](https://github.com/deepr41/budget_bot/blob/main/docs/whats-new.md) for an in-depth depiction of our changes. :)
 
 ## Installation and Setup
 
 ### Pre-requisite: The Telegram Desktop App
 
-Since DollarBot is built on top of Telegram, you'll first need:
+Since BudgetBot is built on top of Telegram, you'll first need:
 1. Download the Telegram Desktop Application <a href="https://desktop.telegram.org/">here.</a>
 ```https://desktop.telegram.org/```
 2. Create a Telegram account or Sign in.
@@ -79,7 +84,7 @@ Open up your terminal and let's get started:
 
 1. Clone this repository to your local system. 
 ```
-   git clone https://github.com/aditikilledar/dollar_bot_SE23/
+   git clone https://github.com/deepr41/budget_bot/
 ```
 2. Start a terminal session in the directory where the project has been cloned. Run the following commands and follow the instructions on-screen to complete the installation.
 ```
@@ -92,21 +97,21 @@ The installation is easy for MacOS or on UNIX terminals.
 
 ### Windows
 
-With Windows, you'll need to use a platform to execute UNIX-like commands in order to execute the setup.sh bash script. Once in the platform, use the steps in the MacOS/Unix Section above to setup DollarBot.
+With Windows, you'll need to use a platform to execute UNIX-like commands in order to execute the setup.sh bash script. Once in the platform, use the steps in the MacOS/Unix Section above to setup BudgetBot.
 
 We've used <a href="https://www.cygwin.com/">Cygwin,</a> but there are more options like WSL that you can explore.
 
 Additionally, find more hints on Cygwin installation <a href="https://stackoverflow.com/questions/6413377/is-there-a-way-to-run-bash-scripts-on-windows">here.</a>
 
-## Running DollarBot:
+## Running BudgetBot:
 
-Once you've executed setup.sh, and all dependencies have been installed, you can start running DollarBot by following these instructions.
+Once you've executed setup.sh, and all dependencies have been installed, you can start running BudgetBot by following these instructions.
 
 1. Open the Telegram Desktop Application and sign in. Once inside Telegram, search for "BotFather". Click on "Start", and enter the following command:
 ```
   /newbot
 ```
-2. Follow the instructions on screen and choose a name for your bot (e.g., `dollarbot`). After this, select a UNIQUE username for your bot that ends with "bot", for example: `dollarbot_<your_nickname>`.
+2. Follow the instructions on screen and choose a name for your bot (e.g., `budgetbot`). After this, select a UNIQUE username for your bot that ends with "bot", for example: `budgetbot_<your_nickname>`.
 
 3. BotFather will now confirm the creation of your bot and provide a TOKEN to access the HTTP API - copy and save this token for future use. Make sure you save this token– don't lose it!
 
@@ -117,7 +122,7 @@ Once you've executed setup.sh, and all dependencies have been installed, you can
   chmod a+x run.sh
   ```
 
-(b) execute the run.sh bash script to start DollarBot
+(b) execute the run.sh bash script to start BudgetBot
    
 ###### MacOS / Unix
 ```
@@ -173,13 +178,19 @@ Here's a quick overview of how each of the commands work. Simply enter /<command
  2. The view category gives the detail if budget is exceeding or in limit with the difference amount         
  3. The delete category allows to delete the budget and start afresh!
 
+#### /income: This option is to provide income from different sources.
+
+#### /Monthly savings: This option comes under budget type and lets you set a savings goal for a month.
+
+#### / JANHAVI'S GOALS AND RECURRANT SPENDINGS INFORMARION NEEDS TO BE ADDED HERE ------ TODO 
+
 ## Contributors
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/aditikilledar"><img src="https://avatars.githubusercontent.com/u/73051765?v=4" width="75px;" alt=""/><br /><sub><b>Aditi Killedar</b></sub></a></td>
-    <td align="center"><a href="https://github.com/shashank-madan"><img src="https://avatars.githubusercontent.com/u/52149707?s=80&v=4" width="75px;" alt=""/><br /><sub><b>Shashank Madan</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/srina1h"><img src="https://avatars.githubusercontent.com/u/47570142?v=4" width="75px;" alt=""/><br /><sub><b> Srinath Srinivasan</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/aiyer786"><img src="https://avatars.githubusercontent.com/u/52149707?s=80&v=4" width="75px;" alt=""/><br /><sub><b>Aditya Iyer</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/deepr41"><img src="https://avatars.githubusercontent.com/u/22258487?v=4" width="75px;" alt=""/><br /><sub><b>Deepak Rajendran</b></sub></a></td>
+    <td align="center"><a href="https://github.com/shafa112"><img src="https://avatars.githubusercontent.com/u/39904345?v=4" width="75px;" alt=""/><br /><sub><b>Shafa Hassan</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Janhavi-23"><img src="https://avatars.githubusercontent.com/u/71866252?v=4" width="75px;" alt=""/><br /><sub><b> Janhavi Pendse</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/deepp2905"><img src="https://avatars.githubusercontent.com/u/62642211?v=4" width="75px;" alt=""/><br /><sub><b>Deep Patel</b></sub></a><br /></td>
   </tr>
 </table>
 
@@ -188,8 +199,7 @@ Here's a quick overview of how each of the commands work. Simply enter /<command
 - Sharing expenses
 - Windows specific setup scripts
 - Adding notes section while recording expenses
-- Incorporating Machine Learning insights into the Analytics Feature
-- Making DollarBot respond to casual conversation like 'Hi' and 'Bye'
+- Making BudgetBot respond to casual conversation like 'Hi' and 'Bye'
 
 ## Acknowledgements
 
