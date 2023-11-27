@@ -139,10 +139,14 @@ def analyse_bot(message, bot):
     balance_str = f"Balance in bank: {balance}"
     saving_str = f"Balance in savings account: {saving}"
 
-    messages.append({"role": "user", "content": f"{expenses_str}"})
-    messages.append({"role": "user", "content": f"{incomes_str}"})
-    messages.append({"role": "user", "content": f"{balance_str}"})
-    messages.append({"role": "user", "content": f"{saving_str}"})
+    if(expenses_str):
+        messages.append({"role": "user", "content": f"{expenses_str}"})
+    if(incomes_str):
+        messages.append({"role": "user", "content": f"{incomes_str}"})
+    if(balance_str):
+        messages.append({"role": "user", "content": f"{balance_str}"})
+    if(saving_str):
+        messages.append({"role": "user", "content": f"{saving_str}"})
 
     bot.send_message(chat_id, "Starting analysis")
     print('called analyse')
