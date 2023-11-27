@@ -1,47 +1,27 @@
-# What's new in Dollar Bot?
+# What's new in Budget Bot?
 
-## Budget predictions:
-
-Tracks trends in spending and predicts an accurate budget based on past expenses.
-Use /predict to try it out for yourself!
+![alt text](https://github.com/deepr41/budget_bot/blob/main/docs/Enhancements.png)
 
 ## Improved command functionality:
 
-Ever wanted to edit the budget for multiple categories at once?
+The bot now shows recommendations of available commands when user enters '/' in prompt. There also exists a menu button to show the list of all commands.
 
-Now it's possible! Giving you a seamless experience without the hassle of typing multiple commands!
+## Multicurrency:
 
-## Better PDF reports:
-
-PDF reports now are more informative with graphical as well as numerical data.
-Generates a detailed expense report of your current expenses and budgets.
-
-Use /pdf to give it a go!
+Four new currencies are available in which the expense can be added and dynamic conversion of reports into default currencies takes place.
 
 ## Recurring expenses:
 
-Now allows you to add subscriptions, rent etc as recurring expenses avoiding the effort to do it multiple times.
+Now allows you to add subscriptions, rent etc as recurring expenses avoiding the effort to do it multiple times. There also exists a schedule that creates an expense for all recurring payemnts every 1st of the month
 
-Try it under /add
+## Income and savings
 
-## Analytics:
+Two new options: Income that adds into our overall budget and Savings which is a fixed amount reducted from budget and will not be used for any expenses.
 
-### Now we have 4 types of graphs you can take a look at!
-1. Category-wise budget split
-2. Category-wise expense split
-3. Percent of budget used vs available budget
-4. Time series graph of expenses
+## Category goals
 
-Here's your budget split by categories:
-![pie chart](https://github.com/aditikilledar/dollar_bot_SE23/new/main/docs/graphs.jpeg?raw=true)
+We can now assign goals for each category and the bot will notify when our goal is reached and also remaining goal amount after each expense.
 
-Use /analytics to try it out!
+## AI Advisor:
 
-## Clean setup script:
 
-If you were looking to run dollarbot yourself, now you'll find the process much simpler.
-Check it out for yourself!
-
-## Better documentation:
-
-Commands are more intuitive to use with better documentation of what they do.
