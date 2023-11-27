@@ -81,7 +81,7 @@ spend_display_option = ["Day", "Month"]
 spend_estimate_option = ["Next day", "Next month"]
 update_options = {"continue": "Continue", "exit": "Exit"}
 budget_options = {"update": "Add/Update", "view": "View", "delete": "Delete"}
-budget_types = {"overall": "Overall Budget", "goal": "Category-Wise Goal", "recurrent": "Recurrent spendings","savings": "Monthly savings"}
+budget_types = {"goal": "Category-Wise Goal", "recurrent": "Recurrent spendings"}
 data_format = {"expense": [], "income": [], "budget": {"budget": 0, "currency": "USD", "goal": {}, "recurrent": {}, "savings": 0}}
 analytics_options = {"overall": "Overall budget split", "spend": "Split of current spend", "remaining": "Remaining value", "history": "Time series graph of spend history"}
 

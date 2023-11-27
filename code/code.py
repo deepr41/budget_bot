@@ -11,12 +11,13 @@ import display
 import estimate
 import delete
 import add
-import budget
+import goal
 import income
 import analytics
 import predict
 import schedule
 import advisor
+import savings
 from datetime import date, datetime
 from jproperties import Properties
 
@@ -80,11 +81,12 @@ custom_commands = [
     ("/display", "Display total expenditure"),
     ("/estimate", "Estimate future expenditure"),
     ("/delete", "Delete a transaction"),
-    ("/budget", "Manage your budget"),
+    ("/goal", "Manage your Goals"),
     ("/analytics", "View analytics"),
     ("/predict", "Predict future budget"),
     ("/help", "Show available commands"),
     ("/faq", "Frequently Asked Questions"),
+    ("/save", "Add savings from your budget"),
     ("/income", "Add income from different sources"),
 ]
 
@@ -222,16 +224,16 @@ def command_delete(message):
     delete.run(message, bot)
 
 # handles budget command
-@bot.message_handler(commands=["budget"])
+@bot.message_handler(commands=["goal"])
 def command_budget(message):
-    budget.run(message, bot)
+    goal.run(message, bot)
 
 # handles income command
 @bot.message_handler(commands=["income"])
 def command_income(message):
     income.run(message, bot)
 
-@bot.message_handler(commands=["savings"])
+@bot.message_handler(commands=["save"])
 def command_savings(message):
     savings.run(message, bot)
 

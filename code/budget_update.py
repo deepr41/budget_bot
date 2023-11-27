@@ -39,14 +39,11 @@ def post_type_selection(message, bot):
                 chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
             )
             raise Exception('Sorry I don\'t recognise this operation "{}"!'.format(op))
-        if op == options["overall"]:
-            update_overall_budget(chat_id, bot)
-        elif op == options["goal"]:
+
+        if op == options["goal"]:
             update_category_budget(message, bot, "goal")
         elif op == options["recurrent"]:
             update_category_budget(message, bot, "recurrent")
-        elif op == options["savings"]:
-            update_savings_budget(message, bot)
     except Exception as e:
         helper.throw_exception(e, message, bot, logging)
 
@@ -75,30 +72,29 @@ def update_overall_budget(chat_id, bot):
 def update_savings_budget(message, bot):
     chat_id = message.chat.id
     option[chat_id]=message.text
-    msg = bot.send_message(
+    bot.send_message(
             chat_id, "Add savings amount {} \n".format(str(option[chat_id]))
         )
     bot.register_next_step_handler(message, post_overall_savings_input, bot)
 
 def post_overall_savings_input(message,bot):
-    chat_id = message.chat.id
-    savings_entered = message.text
-    if float(helper.getOverallBudget(chat_id)) < float(savings_entered):
-        bot.send_message(chat_id, "Savings cannot be more than budget:" + str(helper.getOverallBudget(chat_id)))
-        raise Exception("Savings cannot be more than budget:" + str(helper.getOverallBudget(chat_id)))
-    
-    chat_id = message.chat.id
     user_list = helper.read_json()
-    if str(chat_id) not in user_list:
-            user_list[str(chat_id)] = helper.createNewUserRecord()
-    user_list[str(chat_id)]["budget"]["savings"] = savings_entered
-    helper.write_json(user_list)
+    chat_id = message.chat.id
 
-    user_list = helper.read_json()
     if str(chat_id) not in user_list:
             user_list[str(chat_id)] = helper.createNewUserRecord()
-    overall=user_list[str(chat_id)]["budget"]["budget"]
-    user_list[str(chat_id)]["budget"]["budget"] = float(overall)-float(savings_entered)
+
+    overall_budget = float(user_list[str(chat_id)]['budget']['budget'])
+    savings = float(user_list[str(chat_id)]['budget']['savings'])
+    savings_entered = float(message.text)
+
+    if overall_budget < savings_entered:
+        bot.send_message(chat_id, f"Savings cannot be more than budget: {overall_budget}")
+        raise Exception(f"Savings cannot be more than budget: {overall_budget}")
+    
+    user_list[str(chat_id)]["budget"]["savings"] = str(savings + savings_entered)
+    user_list[str(chat_id)]["budget"]["budget"] = str(overall_budget - savings_entered)
+    
     helper.write_json(user_list)
     bot.send_message(chat_id, "Budget Updated!")
 
