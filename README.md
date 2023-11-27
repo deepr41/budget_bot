@@ -25,7 +25,10 @@ Are you a developer? <a href="https://github.com/aditikilledar/dollar_bot_SE23/b
 [![Repo-size](https://img.shields.io/github/repo-size/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
 [![file_count](https://img.shields.io/github/directory-file-count/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
 [![language_count](https://img.shields.io/github/languages/count/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
-
+[![Downloads](https://img.shields.io/github/downloads/deepr41/budget_bot/total)](https://github.com/deepr41/budget_bot/)
+[![Top Language](https://img.shields.io/github/languages/top/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
+[![Release](https://img.shields.io/github/v/release/deepr41/budget_bot)](https://gitHub.com/deepr41/budget_bot)
+![Codecov](https://img.shields.io/codecov/c/gh/deepr41/budget_bot)
 
 <!-- [![GitHub closed issues](https://img.shields.io/github/issues-closed/sak007/MyDollarBot-BOTGo)](https://github.com/sak007/MyDollarBot-BOTGo/issues?q=is%3Aissue+is%3Aclosed) -->
 
