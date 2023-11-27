@@ -2,6 +2,7 @@ import helper
 import graphing
 from telebot import types
 import os
+from collections import defaultdict
 
 def viewOverallBudget(chat_id, bot):
     if not helper.isCategoryBudgetAvailable(chat_id):
@@ -18,11 +19,14 @@ def viewOverallBudget(chat_id, bot):
     os.remove("overall_split.png")
 
 def viewSpendWise(chat_id, bot):
-    category_spend = {}
-    for cat in helper.getCategoryBudget(chat_id):
-        spend = helper.calculate_total_spendings_for_cateogory_chat_id(chat_id,cat)
-        if spend != 0:
-            category_spend[cat] = spend
+    category_spend = defaultdict(int)
+    
+    data = helper.getUserData(chat_id)
+    expenses = data['expense']
+    
+    for i in expenses:
+        _, category, amount  = i.split(",")
+        category_spend[category] += float(amount)
 
     if category_spend == {}:
         bot.send_message(chat_id, "No category spend available", reply_markup=types.ReplyKeyboardRemove())

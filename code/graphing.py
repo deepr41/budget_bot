@@ -79,7 +79,7 @@ def visualize(total_text, monthly_budget):
 def overall_split(category_budget):
     _, ax = plt.subplots()
     ax.pie(category_budget.values(), labels=category_budget.keys(), autopct='%1.1f%%')
-    ax.set_title("Budget split")
+    ax.set_title("Goals split")
     img_name = "overall_split.png"
     plt.savefig(img_name)
     plt.close()
