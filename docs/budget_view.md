@@ -2,7 +2,7 @@
 The budget_view module contains all the functions required to implement the display budget feature. In essence, all operations involved in displaying a budget are taken care of in this module and are implemented here. 
 
 # Location of Code for this Feature
-The code that implements this feature can be found [here](https://github.com/deep41/budget_bot/blob/main/code/budget_view.py)
+The code that implements this feature can be found [here](https://github.com/deepr41/budget_bot/blob/main/code/budget_view.py)
 
 # Code Description
 ## Functions
