@@ -1,21 +1,5 @@
 # 💰 Dollar Bot 💰
 
-<!-- TABLE OF CONTENTS -->
-<b><h3>Table of Contents</h3></b>
-  <ol>
-    <li><a href="#whats-dollarbot">What's DollarBot?
-    <li><a href="#why-use-dollarbot">Why use DollarBot?</a></li>
-    <li><a href="#demo">Demo</a></li>
-    <li><a href="#whats-new">What's new in this version?</a></li>
-    <li><a href="#installation-and-setup">Installation and Setup</a></li>
-   <li><a href="#how-to-use">How to use?</a></li>
-   <li><a href="#contributors">Contributors</a></li>
-   <li><a href="#future-work">Future Work</a></li>
-   <li><a href="#acknowledgements">Acknowledgements</a></li>
-  </ol>
-
-Are you a developer? <a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/Developer_ReadMe.md">Click here: For Developers and Future Contributors</a>
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 ![Issues Open](https://img.shields.io/github/issues/deepr41/budget_bot)
@@ -32,7 +16,23 @@ Are you a developer? <a href="https://github.com/aditikilledar/dollar_bot_SE23/b
 
 <!--![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/deepr41/budget_bot/.github/workflows/python-app.yml)-->
 
-<hr>
+<!-- TABLE OF CONTENTS -->
+# Table of Contents
+- [What's DollarBot?](#whats-dollarbot)
+- [Why use DollarBot?](#why-use-dollarbot)
+- [Demo](#demo)
+- [What's new in this version?](#whats-new)
+- [Installation and Setup](#installation-and-setup)
+- [How to use?](#how-to-use)
+- [Contributors](#contributors)
+- [Future Work](#future-work)
+- [Acknowledgements](#acknowledgements)
+
+
+## Are you a developer? 💻
+<a href="https://github.com/deepr41/budget_bot/Developer_ReadMe.md">Detailed Documentation For Developers and Future Contributors</a>
+<br></br>
+
 
 ## What's DollarBot?
 
@@ -60,7 +60,7 @@ Demo Video -> [https://www.youtube.com/watch?v=XlndmRhr9Lc]
 
 ## What's new?
 
-We've considerably extended this project to make using DollarBot easy and engaging.\
+We've considerably extended this project to make using DollarBot easy and engaging.
 1. Expressive Graphs
 2. Budget prediction
 3. Clearer and more informative PDF Reports
@@ -68,7 +68,7 @@ We've considerably extended this project to make using DollarBot easy and engagi
 5. Budget Creation Updated
 6. Clearer wording in the documentation
 
-Check [this documentation out](https://github.com/aditikilledar/dollar_bot_SE23/blob/main/docs/whats-new.md) for an in-depth depiction of our changes. :)
+Check [this documentation out](https://github.com/deepr41/budget_bot/blob/main/docs/whats-new.md) for an in-depth depiction of our changes. :)
 
 ## Installation and Setup
 
