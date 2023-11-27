@@ -16,14 +16,17 @@
 
 Are you a developer? <a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/Developer_ReadMe.md">Click here: For Developers and Future Contributors</a>
 
-![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
-[![Platform](https://img.shields.io/badge/Platform-Telegram-blue)](https://desktop.telegram.org/)
-![GitHub](https://img.shields.io/badge/Language-Python-blue.svg)
-[![GitHub contributors](https://img.shields.io/github/contributors/aditikilledar/dollar_bot_SE23)](https://github.com/aditikilledar/dollar_bot_SE23/graphs/contributors)
-[![DOI](https://zenodo.org/badge/691334031.svg)](https://zenodo.org/doi/10.5281/zenodo.10023639)
-[![Build Status](https://app.travis-ci.com/usmanwardag/dollar_bot.svg?branch=main)](https://app.travis-ci.com/usmanwardag/dollar_bot)
-[![codecov](https://codecov.io/gh/aditikilledar/dollar_bot_SE23/graph/badge.svg?token=23RW1XPB3P)](https://codecov.io/gh/aditikilledar/dollar_bot_SE23)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed/aditikilledar/dollar_bot_SE23)](https://github.com/aditikilledar/dollar_bot_SE23/issues?q=is%3Aissue+is%3Aclosed)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
+![Issues Open](https://img.shields.io/github/issues/deepr41/budget_bot)
+[![Issues Closed](https://img.shields.io/github/issues-closed/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
+![GitHub last commit](https://img.shields.io/github/last-commit/deepr41/budget_bot/:main)
+![Lines of code](https://tokei.rs/b1/github/deepr41/wolfjobs)
+[![Repo-size](https://img.shields.io/github/repo-size/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
+[![file_count](https://img.shields.io/github/directory-file-count/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
+[![language_count](https://img.shields.io/github/languages/count/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
+
+
 <!-- [![GitHub closed issues](https://img.shields.io/github/issues-closed/sak007/MyDollarBot-BOTGo)](https://github.com/sak007/MyDollarBot-BOTGo/issues?q=is%3Aissue+is%3Aclosed) -->
 
 <hr>
