@@ -200,7 +200,10 @@ Here's a quick overview of how each of the commands work. Simply enter /<command
 
 ## Acknowledgements
 
-- We would like to express our gratitude 🙏🏻 and a big thank you 😇 to Prof. Dr. Timothy Menzie for giving us the opportunity to get into the shoes of software building and learning new skills and development process throught the project building.
-- A big thank you 😊 to the Teaching Assistants for their support.
-- Thank you to the previous team 😊 for a thorough ReadMe and deatiled documentation.[MyDollarBot](https://github.com/sak007/MyDollarBot-BOTGo)
-- Thank you to the ⭐️[Telegram bot](https://github.com/python-telegram-bot/python-telegram-bot)
+- We extend our heartfelt gratitude to Prof. Dr. Timothy Menzie for affording us the invaluable opportunity to delve into the realm of software building, fostering new skills, and navigating the development process throughout the project.
+
+- A warm and appreciative thank you is extended to the Teaching Assistants for their unwavering support.
+
+- Our sincere thanks are also extended to the [previous team](https://github.com/aditikilledar/dollar_bot_SE23) for providing a comprehensive ReadMe and detailed documentation, which has proven instrumental in our understanding and progress 😊.
+
+- Lastly, a special acknowledgment goes to the Telegram bot, accessible at [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot), for its major contribution to our project.
