@@ -39,14 +39,11 @@ def post_type_selection(message, bot):
                 chat_id, "Invalid", reply_markup=types.ReplyKeyboardRemove()
             )
             raise Exception('Sorry I don\'t recognise this operation "{}"!'.format(op))
-        if op == options["overall"]:
-            update_overall_budget(chat_id, bot)
-        elif op == options["goal"]:
+
+        if op == options["goal"]:
             update_category_budget(message, bot, "goal")
         elif op == options["recurrent"]:
             update_category_budget(message, bot, "recurrent")
-        # elif op == options["savings"]:
-        #     update_savings_budget(message, bot)
     except Exception as e:
         helper.throw_exception(e, message, bot, logging)
 
