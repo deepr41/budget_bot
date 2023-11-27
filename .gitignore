@@ -135,3 +135,5 @@ dmypy.json
 expense_record.json
 setenv.sh
 user.properties
+expense_history.png
+expense_report.pdf
