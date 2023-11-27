@@ -2,7 +2,7 @@
 code.py is the main file from where calls to the corresponding .py files for all features are sent. It contains a number of endpoints which redirect to function calls in the corresponding files. 
 
 # Location of Code for this Feature
-The code that implements this feature can be found [here](https://github.com/aditikilledar/dollar_bot_SE23/blob/main/code/code.py)
+The code that implements this feature can be found [here](https://github.com/deep41/budget_bot/blob/main/code/code.py)
 
 # Code Description
 ## Functions
@@ -47,7 +47,19 @@ Takes 1 argument **message** which contains the message from the user along with
 Takes 1 argument **message** which contains the message from the user along with the chat ID of the user chat. It then calls display.py to run to execute the add functionality. Commands used to run this: command=['display']
 
 14. command_delete(message):
-Takes 1 argument **message** which contains the message from the user along with the chat ID of the user chat. It then calls delete.py to run to execute the add functionality. Commands used to run this: command=['display']
+Takes 1 argument **message** which contains the message from the user along with the chat ID of the user chat. It then calls delete.py to run to execute the add functionality. Commands used to run this: command=['delete']
+
+15. command_income(message):
+Takes 1 argument **message** which contains the message from the user along with the chat ID of the user chat. It then calls income.py to run to execute the add functionality. Commands used to run this: command=['income']
+
+16. command_savings(message):
+Takes 1 argument **message** which contains the message from the user along with the chat ID of the user chat. It then calls savings.py to run to execute the add functionality. Commands used to run this: command=['saving']
+
+17. command_advisor(message):
+Takes 1 argument **message** which contains the message from the user along with the chat ID of the user chat. It then calls advisor.py to run to execute the add functionality. Commands used to run this: command=['advisor']
+
+18. monthly_recurrent_expense
+It iterates through all recurrent payments stored and creates corresponsing expenses for them and this function is scheduled to run every 1st of the month
 
 # How to run this feature?
 This file contains information on the main code.py file from where all features are run. Instructions to run this are the same as instructions to run the project and can be found in README.md.
