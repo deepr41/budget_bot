@@ -17,7 +17,6 @@
 <!--![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/deepr41/budget_bot/.github/workflows/python-app.yml)-->
 
 <!-- TABLE OF CONTENTS -->
-# Table of Contents
 - [What is Budget Bot?](#what-is-budget-bot)
 - [Why use Budget Bot?](#why-use-budget-bot)
 - [Demo](#demo)
