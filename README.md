@@ -1,5 +1,3 @@
-# 💰 Dollar Bot 💰
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 ![Issues Open](https://img.shields.io/github/issues/deepr41/budget_bot)
@@ -14,12 +12,14 @@
 [![Release](https://img.shields.io/github/v/release/deepr41/budget_bot)](https://gitHub.com/deepr41/budget_bot)
 ![Codecov](https://img.shields.io/codecov/c/gh/deepr41/budget_bot)
 
+# 💲 Budget Bot 💲
+
 <!--![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/deepr41/budget_bot/.github/workflows/python-app.yml)-->
 
 <!-- TABLE OF CONTENTS -->
 # Table of Contents
-- [What's DollarBot?](#whats-dollarbot)
-- [Why use DollarBot?](#why-use-dollarbot)
+- [What is Budget Bot?](#what-is-budget-bot)
+- [Why use Budget Bot?](#why-use-budget-bot)
 - [Demo](#demo)
 - [What's new in this version?](#whats-new)
 - [Installation and Setup](#installation-and-setup)
@@ -34,25 +34,24 @@
 <br></br>
 
 
-## What's DollarBot?
+## What is Budget Bot?
 
-DollarBot is a handy little bot built on top of Telegram, to help you with daily expense tracking and analytics on your past spends. 
-
-It's easy to setup, run and use on a daily basis!
-
+BudgetBot💲 is a user-friendly Telegram bot designed to simplify your budgeting process and help you manage your finances. <br>
+With intuitive in-chat commands, BudgetBot allows you to effortlessly set and customize your budget, track expenses, add income from various sources, and even predict your next month's budget based on _current_ spending trends.
+<br>
+<br>
 <a href="https://www.canva.com/design/DAFxwU4ABIg/LqMkLeGUBhC__JmWmdkFiQ/watch?utm_content=DAFxwU4ABIg&utm_campaign=designshare&utm_medium=link&utm_source=editor">Click here for a video overview!!</a>
 
-## Why use DollarBot?
+## Why use Budget Bot?
 
-With simple in-chat commands, this bot helps you:
-- Set your own customized budget
-- Add/Record new spendings
-- Display your spending trends through engaging graphs
-- Predict your next month's budget based on your current expenditure
-- Display your spending history
-- Clear/Erase all your records
-- Edit/Change any spending details if you wish to
-- View Analytics and export as a pdf
+- **Easy Budgeting💼:** Set and update your budget with simple commands tailored to your financial preferences
+- **Expense Tracking 📅:** Record and categorize your expenses, providing a detailed summary of your spending history
+- **Income Management💵:** Add income from different sources and monitor your financial inflow effortlessly
+- **Graphical Analytics📈**: Visualize your spending trends through expressive graphs, gaining insights into your financial habits
+- **Budget Prediction🔮:** Utilize the bot's analytical capabilities to predict your future budget, ensuring financial planning accuracy
+- **PDF Reports📄:** Generate clear and informative PDF reports of your spending history and analytics for easy reference
+- **Recurring Expenses🔁:** Seamlessly add recurring expenses to enhance the accuracy of your budgeting
+- **Goal Setting🎯:** Set savings goals for specific categories, fostering a proactive approach to financial planning
 
 ## Demo
 
@@ -60,13 +59,13 @@ Demo Video -> [https://www.youtube.com/watch?v=XlndmRhr9Lc]
 
 ## What's new?
 
-We've considerably extended this project to make using DollarBot easy and engaging.
-1. Expressive Graphs
-2. Budget prediction
-3. Clearer and more informative PDF Reports
-4. Ability to add recurring expenses
-5. Budget Creation Updated
-6. Clearer wording in the documentation
+We've considerably extended this project to make using Budget Bot easy and engaging.
+- Expressive Graphs📊: Engaging visual representations of your financial data for better understanding.
+- Budget Prediction🤑: Anticipate your budget for the upcoming month based on your current expenditure patterns.
+- Clearer PDF Reports📈: Improved documentation with more detailed and informative PDF reports for effective analysis.
+- Recurring Expenses🔁: Now you can effortlessly add recurring expenses, ensuring a more comprehensive budget.
+- Enhanced Budget Creation🔄: Updated features for creating, updating, and deleting budgets, providing greater flexibility.
+- Integrated OpenAI API🚀: Access OpenAI tools for enhanced analysis and receive tips on efficient expense management.
 
 Check [this documentation out](https://github.com/deepr41/budget_bot/blob/main/docs/whats-new.md) for an in-depth depiction of our changes. :)
 
@@ -74,9 +73,9 @@ Check [this documentation out](https://github.com/deepr41/budget_bot/blob/main/d
 
 ### Pre-requisite: The Telegram Desktop App
 
-Since DollarBot is built on top of Telegram, you'll first need:
-1. Download the Telegram Desktop Application <a href="https://desktop.telegram.org/">here.</a>
-```https://desktop.telegram.org/```
+Since Budget Bot is built on top of Telegram, you'll first need:
+1. Download the Telegram Desktop Application <a href="https://desktop.telegram.org/">```https://desktop.telegram.org/```</a>
+
 2. Create a Telegram account or Sign in.
 
 Open up your terminal and let's get started:
@@ -85,7 +84,7 @@ Open up your terminal and let's get started:
 
 1. Clone this repository to your local system. 
 ```
-   git clone https://github.com/aditikilledar/dollar_bot_SE23/
+   git clone https://github.com/deepr41/budget_bot
 ```
 2. Start a terminal session in the directory where the project has been cloned. Run the following commands and follow the instructions on-screen to complete the installation.
 ```
@@ -98,21 +97,21 @@ The installation is easy for MacOS or on UNIX terminals.
 
 ### Windows
 
-With Windows, you'll need to use a platform to execute UNIX-like commands in order to execute the setup.sh bash script. Once in the platform, use the steps in the MacOS/Unix Section above to setup DollarBot.
+With Windows, you'll need to use a platform to execute UNIX-like commands in order to execute the setup.sh bash script. Once in the platform, use the steps in the MacOS/Unix Section above to setup Budget Bot.
 
 We've used <a href="https://www.cygwin.com/">Cygwin,</a> but there are more options like WSL that you can explore.
 
 Additionally, find more hints on Cygwin installation <a href="https://stackoverflow.com/questions/6413377/is-there-a-way-to-run-bash-scripts-on-windows">here.</a>
 
-## Running DollarBot:
+## Running Budget Bot:
 
-Once you've executed setup.sh, and all dependencies have been installed, you can start running DollarBot by following these instructions.
+Once you've executed setup.sh, and all dependencies have been installed, you can start running Budget Bot by following these instructions.
 
 1. Open the Telegram Desktop Application and sign in. Once inside Telegram, search for "BotFather". Click on "Start", and enter the following command:
 ```
   /newbot
 ```
-2. Follow the instructions on screen and choose a name for your bot (e.g., `dollarbot`). After this, select a UNIQUE username for your bot that ends with "bot", for example: `dollarbot_<your_nickname>`.
+2. Follow the instructions on screen and choose a name for your bot (e.g., `budgetbot`). After this, select a UNIQUE username for your bot that ends with "bot", for example: `budgetbot_<your_nickname>`.
 
 3. BotFather will now confirm the creation of your bot and provide a TOKEN to access the HTTP API - copy and save this token for future use. Make sure you save this token– don't lose it!
 
@@ -123,7 +122,7 @@ Once you've executed setup.sh, and all dependencies have been installed, you can
   chmod a+x run.sh
   ```
 
-(b) execute the run.sh bash script to start DollarBot
+(b) execute the run.sh bash script to start Budget Bot
    
 ###### MacOS / Unix
 ```
@@ -196,7 +195,7 @@ Here's a quick overview of how each of the commands work. Simply enter /<command
 - Windows specific setup scripts
 - Adding notes section while recording expenses
 - Incorporating Machine Learning insights into the Analytics Feature
-- Making DollarBot respond to casual conversation like 'Hi' and 'Bye'
+- Making Budget Bot respond to casual conversation like 'Hi' and 'Bye'
 
 ## Acknowledgements
 
