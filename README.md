@@ -44,6 +44,7 @@ With simple in-chat commands, this bot helps you:
 - Add your income from different sources
 - Add recurrant spendings
 - Add your monthly savings
+- Add your goals categorywise
 - Display your spending trends through engaging graphs
 - Predict your next month's budget based on your current expenditure
 - Display your spending history
@@ -200,6 +201,7 @@ Here's a quick overview of how each of the commands work. Simply enter /<command
 - Windows specific setup scripts
 - Adding notes section while recording expenses
 - Making BudgetBot respond to casual conversation like 'Hi' and 'Bye'
+- Add budget items through OpenAI API
 
 ## Acknowledgements
 
