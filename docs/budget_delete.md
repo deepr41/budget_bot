@@ -1,14 +1,14 @@
-# About MyDollarBot's budget_delete module
-The budget_view module contains all the functions required to implement the display delete/removal feature. In essence, all operations involved in removal and deletion of a budget are taken care of in this module and are implemented here. 
+# About BudgetBot's budget_delete module
+The budget_delete module incorporates the functionality to remove an existing budget entered by the user. It essentially resets all the factors associated with the budget to their initial empty values. In summary, this module manages and implements all the operations related to the removal and deletion of a budget.
 
 # Location of Code for this Feature
-The code that implements this feature can be found [here](https://github.com/aditikilledar/dollar_bot_SE23/blob/main/code/budget_delete.py)
+The code that implements this feature can be found [here](https://github.com/deepr41/budget_bot/blob/main/code/budget_delete.py)
 
 # Code Description
 ## Functions
 
 1. run(message, bot):
-This is the main function used to implement the budget delete feature. It takes 2 arguments for processing - **message** which is the message from the user, and **bot** which is the telegram bot object from the main code.py function. It gets the user's chat ID from the message object, and reads all user data through the read_json method from the helper module. It then proceeds to empty the budget data for the particular user based on the user ID provided from the UI. It returns a simple message indicating that this operation has been done to the UI.
+This serves as the primary function for executing the budget deletion feature. It requires two arguments for processing: message, representing the user's message, and bot, the Telegram bot object from the main code.py function. The function extracts the user's chat ID from the message object and retrieves all user data using the read_json method from the helper module. Subsequently, it proceeds to clear the budget data for the specific user, based on the provided user ID from the UI. The function then returns a straightforward message indicating the completion of this operation to the UI.
 
 
 # How to run this feature?
