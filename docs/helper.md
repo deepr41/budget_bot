@@ -2,7 +2,7 @@
 The helper file contains a set of functions that are commonly used for repeated tasks in the various features of MyDollarBot. Since these come up often, we have put them all up here in a separate file for reusability.
 
 # Location of Code for this Feature
-The code that implements this feature can be found [here](https://github.com/aditikilledar/dollar_bot_SE23/blob/main/code/helper.py)
+The code that implements this feature can be found [here](https://github.com/deepr41/budget_bot/blob/main/code/helper.py)
 
 # Code Description
 ## Functions
