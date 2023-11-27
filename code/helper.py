@@ -18,6 +18,7 @@ transaction_type = [
     "Old",
     "Repeat existing"
 ]
+
 day = {
     '1' :  1,
     '2' :  2,
@@ -80,8 +81,8 @@ spend_display_option = ["Day", "Month"]
 spend_estimate_option = ["Next day", "Next month"]
 update_options = {"continue": "Continue", "exit": "Exit"}
 budget_options = {"update": "Add/Update", "view": "View", "delete": "Delete"}
-budget_types = {"overall": "Overall Budget", "goal": "Category-Wise Goal", "recurrent": "Recurrent spendings"}
-data_format = {"expense": [], "income": [], "budget": {"budget": 0, "currency": "USD", "goal": {}, "recurrent": {}, "saving": 0}}
+budget_types = {"overall": "Overall Budget", "goal": "Category-Wise Goal", "recurrent": "Recurrent spendings","savings": "Monthly savings"}
+data_format = {"expense": [], "income": [], "budget": {"budget": 0, "currency": "USD", "goal": {}, "recurrent": {}, "savings": 0}}
 analytics_options = {"overall": "Overall budget split", "spend": "Split of current spend", "remaining": "Remaining value", "history": "Time series graph of spend history"}
 
 # set of implemented commands and their description
@@ -105,6 +106,7 @@ commands = {
         \n 1. The Add/update category is to set the new budget or update the existing budget \
         \n 2. The view category gives the detail if budget is exceeding or in limit with the difference amount \
         \n 3. The delete category allows to delete the budget and start afresh!  ",
+    
 }
 
 dateFormat = "%d-%b-%Y"
@@ -302,7 +304,7 @@ def calculateRemainingOverallBudget(chat_id):
     query = datetime.now().today().strftime(getMonthFormat())
     queryResult = [value for _, value in enumerate(history) if str(query) in value]
     return round(float(budget) - calculate_total_spendings(queryResult), 2)
-
+    
 def calculate_total_spendings(queryResult):
     total = 0
     for row in queryResult:
