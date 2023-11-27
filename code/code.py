@@ -17,6 +17,7 @@ import analytics
 import predict
 import schedule
 import advisor
+import savings
 from datetime import date, datetime
 from jproperties import Properties
 
@@ -85,6 +86,7 @@ custom_commands = [
     ("/predict", "Predict future budget"),
     ("/help", "Show available commands"),
     ("/faq", "Frequently Asked Questions"),
+    ("/save", "Add savings from your budget"),
     ("/income", "Add income from different sources"),
 ]
 
@@ -231,7 +233,7 @@ def command_budget(message):
 def command_income(message):
     income.run(message, bot)
 
-@bot.message_handler(commands=["savings"])
+@bot.message_handler(commands=["save"])
 def command_savings(message):
     savings.run(message, bot)
 

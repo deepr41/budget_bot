@@ -45,8 +45,8 @@ def post_type_selection(message, bot):
             update_category_budget(message, bot, "goal")
         elif op == options["recurrent"]:
             update_category_budget(message, bot, "recurrent")
-        elif op == options["savings"]:
-            update_savings_budget(message, bot)
+        # elif op == options["savings"]:
+        #     update_savings_budget(message, bot)
     except Exception as e:
         helper.throw_exception(e, message, bot, logging)
 
