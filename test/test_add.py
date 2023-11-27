@@ -29,6 +29,14 @@ def test_post_category_selection_working(mock_telebot, mocker):
     add.post_category_selection(message, mc)
     assert mc.send_message.called
 
+@patch("telebot.telebot")
+def test_post_currency_selection_working(mock_telebot, mocker):
+    mc = mock_telebot.return_value
+    mc.send_message.return_value = True
+
+    message = create_message("hello from testing!")
+    add.post_currency_selection(message, mc)
+    assert mc.send_message.called
 
 @patch("telebot.telebot")
 def test_post_category_selection_noMatchingCategory(mock_telebot, mocker):
