@@ -30,7 +30,7 @@ Are you a developer? <a href="https://github.com/aditikilledar/dollar_bot_SE23/b
 [![Release](https://img.shields.io/github/v/release/deepr41/budget_bot)](https://gitHub.com/deepr41/budget_bot)
 ![Codecov](https://img.shields.io/codecov/c/gh/deepr41/budget_bot)
 
-//![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/deepr41/budget_bot/.github/workflows/python-app.yml)
+<!--![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/deepr41/budget_bot/.github/workflows/python-app.yml)-->
 
 <hr>
 
