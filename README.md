@@ -59,13 +59,15 @@ Demo Video -> [https://www.youtube.com/watch?v=XlndmRhr9Lc]
 
 ## What's new?
 
+![Enhancements](https://github.com/deepr41/budget_bot/blob/main/docs/Enhancements.png)
+
 We've considerably extended this project to make using Budget Bot easy and engaging.
 - Expressive Graphs📊: Engaging visual representations of your financial data for better understanding.
 - Budget Prediction🤑: Anticipate your budget for the upcoming month based on your current expenditure patterns.
 - Clearer PDF Reports📈: Improved documentation with more detailed and informative PDF reports for effective analysis.
 - Recurring Expenses🔁: Now you can effortlessly add recurring expenses, ensuring a more comprehensive budget.
 - Enhanced Budget Creation🔄: Updated features for creating, updating, and deleting budgets, providing greater flexibility.
-- Integrated OpenAI API🚀: Access OpenAI tools for enhanced analysis and receive tips on efficient expense management.
+- Integrated OpenAI API🚀: Receive tips on efficient expense management and enhanced analysis from an AI Advisor.
 
 Check [this documentation out](https://github.com/deepr41/budget_bot/blob/main/docs/whats-new.md) for an in-depth depiction of our changes. :)
 
