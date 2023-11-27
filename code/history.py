@@ -23,7 +23,19 @@ def run(message, bot):
             spend_total_str = "Sorry! No spending records found!"
         else:
             for rec in user_history:
-                spend_total_str += str(rec) + "\n"
+                temp = rec.split(',')
+                curr = ''
+                user_currency = helper.getOverallCurrency(chat_id)
+                if(user_currency == 'USD'):
+                    curr = '$'
+                elif(user_currency == 'INR'):
+                    curr = '₹'
+                elif(user_currency == 'EUR'):
+                    curr = '€'
+                elif(user_currency == 'GBP'):
+                    curr = '£'
+                    
+                spend_total_str += str(f"{temp[0]} {temp[1]} {curr}{temp[2]}") + "\n"
         bot.send_message(chat_id, spend_total_str)
     except Exception as e:
         logging.exception(str(e))

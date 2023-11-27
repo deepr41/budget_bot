@@ -311,16 +311,13 @@ def add_user_record(chat_id, record_to_be_added):
     is the expense record to be added to the store. It then stores this expense record in the store.
     """
     user_list = helper.read_json()
-    print("!" * 5)
-    print("before")
     print(user_list)
-    print("!" * 5)
     if str(chat_id) not in user_list:
         user_list[str(chat_id)] = helper.createNewUserRecord()
 
     user_list[str(chat_id)]["expense"].append(f"{record_to_be_added}")
-    print("!" * 5)
-    print("after")
+    amount = float(record_to_be_added.split(',')[2])
+    user_list[str(chat_id)]['budget']['budget'] = str(float(user_list[str(chat_id)]['budget']['budget']) - amount)
+
     print(user_list)
-    print("!" * 5)
     return user_list
