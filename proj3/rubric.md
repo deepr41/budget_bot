@@ -122,7 +122,7 @@
 |h) If your software is developed as an open source project (and, not just a project developing open source software), do you have a governance model?|Yes|
 |||
 |How you manage contributions||
-|a) Do you accept contributions (e.g. bug fixes, enhancements, documentation updates, tutorials) from people who are not part of your project?|No|
+|a) Do you accept contributions (e.g. bug fixes, enhancements, documentation updates, tutorials) from people who are not part of your project?|Yes|
 |b) Do you have a contributions policy?|Yes|
 |c) Is your contributions' policy publicly available?|Yes|
 |d) Do contributors keep the copyright/IP of their contributions?|Yes|
