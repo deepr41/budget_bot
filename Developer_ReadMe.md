@@ -1,4 +1,4 @@
-# For Developers: From the Developers of DollarBot
+# For Developers: From the Developers of BudgetBot
 
 <details open="open">
   <summary>Table of Contents</summary>
@@ -18,18 +18,18 @@
 For a detailed explanation of the code, follow the links below:
 
 <ol>
-    <li><a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/docs/code.md">Main Code File</a></li>
+    <li><a href="https://github.com/deepr41/budget_bot/blob/main/docs/code.md">Main Code File</a></li>
     <b> Features: </b>
-    <li><a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/docs/add.md">Add</a></li>
-    <li><a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/docs/budget_delete.md">Budget Delete</a></li>
-    <li><a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/docs/budget_update.md">Budget Update</a></li>
-    <li><a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/docs/budget_view.md">Budget View</a></li>
-    <li><a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/docs/delete.md">Delete</a></li>
-    <li><a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/docs/display.md">Display</a></li>
-    <li><a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/docs/estimate.md">Estimate</a></li>
-    <li><a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/docs/graphing.md">Graphing</a></li>
-    <li><a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/docs/helper.md">Helper</a></li>
-    <li><a href="https://github.com/aditikilledar/dollar_bot_SE23/blob/main/docs/history.md">History</a></li>
+    <li><a href="https://github.com/deepr41/budget_bot/blob/main/docs/add.md">Add</a></li>
+    <li><a href="https://github.com/deepr41/budget_bot/blob/main/docs/budget_delete.md">Budget Delete</a></li>
+    <li><a href="https://github.com/deepr41/budget_bot/blob/main/docs/budget_update.md">Budget Update</a></li>
+    <li><a href="https://github.com/deepr41/budget_bot/blob/main/docs/budget_view.md">Budget View</a></li>
+    <li><a href="https://github.com/deepr41/budget_bot/blob/main/docs/delete.md">Delete</a></li>
+    <li><a href="https://github.com/deepr41/budget_bot/blob/main/docs/display.md">Display</a></li>
+    <li><a href="https://github.com/deepr41/budget_bot/blob/main/docs/estimate.md">Estimate</a></li>
+    <li><a href="https://github.com/deepr41/budget_bot/blob/main/docs/graphing.md">Graphing</a></li>
+    <li><a href="https://github.com/deepr41/budget_bot/blob/main/docs/helper.md">Helper</a></li>
+    <li><a href="https://github.com/deepr41/budget_bot/blob/main/docs/history.md">History</a></li>
   </ol>
 
 
@@ -58,9 +58,9 @@ This project is licensed under the terms of the MIT license. Please check [Licen
 
 ## How to Contribute
 
-We would be happy to receive contributions! If you'd like to, please go through our [CONTRIBUTING.md](https://github.com/aditikilledar/dollar_bot_SE23/blob/main/CONTRIBUTING.md)
+We would be happy to receive contributions! If you'd like to, please go through our [CONTRIBUTING.md](https://github.com/deepr41/budget_bot/blob/main/CONTRIBUTING.md)
 
-For any feedback, issues, or bug reports, please create an issue [here](https://github.com/aditikilledar/dollar_bot_SE23/issues/new/choose).
+For any feedback, issues, or bug reports, please create an issue [here](https://github.com/deepr41/budget_bot/issues/new/choose).
 
 ## Future RoadMap
 
