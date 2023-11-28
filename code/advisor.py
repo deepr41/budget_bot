@@ -95,7 +95,7 @@ def post_advisor_prompting(message, bot):
       return
     
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-3.5-turbo-1106",
         messages=messages,
       )
     msg = response.choices[0].message.content
@@ -151,7 +151,7 @@ def analyse_bot(message, bot):
     bot.send_message(chat_id, "Starting analysis")
     print('called analyse')
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-3.5-turbo-1106",
         messages=messages,
       )
     msg = response.choices[0].message.content
@@ -167,7 +167,7 @@ def tips_message(message, bot):
       {"role": "user", "content": "Give me exactly one random tip to save on my budget"},
     ]
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo-16k",
+        model="gpt-3.5-turbo-1106",
         messages=messages,
       )
     msg = response.choices[0].message.content
