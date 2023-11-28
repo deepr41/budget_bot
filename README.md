@@ -32,8 +32,6 @@
 <a href="https://github.com/deepr41/budget_bot/Developer_ReadMe.md">Detailed Documentation For Developers and Future Contributors</a>
 <br></br>
 
-<hr>
-
 ## What is Budget Bot?
 
 BudgetBot💲 is a user-friendly Telegram bot designed to simplify your budgeting process and help you manage your finances. <br>
