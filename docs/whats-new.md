@@ -24,4 +24,10 @@ We can now assign goals for each category and the bot will notify when our goal 
 
 ## AI Advisor:
 
+Transform your financial future with our AI Advisor – your intelligent companion for personalized investment strategies, and smart financial planning. Experience the power of AI-driven financial guidance at your fingertips!
+
+## AI Powered reports
+
+Analyse your incomes and expenses with the power of AI. Find insightful ways to save money. 
+
 
