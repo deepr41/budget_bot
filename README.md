@@ -2,7 +2,7 @@
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 ![Issues Open](https://img.shields.io/github/issues/deepr41/budget_bot)
 [![Issues Closed](https://img.shields.io/github/issues-closed/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
-![GitHub last commit](https://img.shields.io/github/last-commit/deepr41/budget_bot/:main)
+![GitHub last commit](https://img.shields.io/github/last-commit/deepr41/budget_bot/main)
 ![Lines of code](https://tokei.rs/b1/github/deepr41/wolfjobs)
 [![Repo-size](https://img.shields.io/github/repo-size/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
 [![file_count](https://img.shields.io/github/directory-file-count/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
