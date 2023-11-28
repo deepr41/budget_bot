@@ -19,5 +19,5 @@ It takes 2 arguments for processing - **message** which is the message from the 
 Takes 2 arguments for processing - **queryResult** which is the query result from the estimate total function in the same file. It parses the query result and turns it into a form suitable for display on the UI by the user. **days_to_estimate** is a variable that tells the function to calculate the estimate for a specified period like a day or month.
 
 # How to run this feature?
-
+Once the project is running(please follow the instructions given in the main README.md for this), please type /estimate into the telegram bot.
 
