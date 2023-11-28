@@ -23,7 +23,7 @@
 |Use of code coverage	|3|<https://github.com/deepr41/budget_bot#readme>|
 |Other automated analysis tools	|3|<https://github.com/deepr41/budget_bot#readme>|
 |Test cases exist	|3|<https://github.com/deepr41/budget_bot/tree/main/test>|
-|Test cases are routinely executed	|3||
+|Test cases are routinely executed	|3|<https://github.com/deepr41/budget_bot/actions>|
 |The files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up	|3|<https://github.com/deepr41/budget_bot/blob/main/CONTRIBUTING.md>|
 |Issues are discussed before they are closed	|3|<https://github.com/deepr41/budget_bot/issues?q=is%3Aissue+is%3Aclosed>|
 |Chat channel: exists	|3|<p>Whatsapp, Teams</p><p></p>|
