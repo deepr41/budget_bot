@@ -34,4 +34,4 @@ The code that implements this feature can be found [here](https://github.com/dee
     called to visualize this data, and the resulting graph is sent to the user through the Telegram bot. 
 
 # How to run this feature?
-
+Once the project is running(please follow the instructions given in the main README.md for this), please type /analytics into the telegram bot.
