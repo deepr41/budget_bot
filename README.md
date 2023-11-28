@@ -4,7 +4,7 @@
 <b><h3>Table of Contents</h3></b>
   <ol>
     <li><a href="#whats-budgetbot">What's BudgetBot?
-    <li><a href="#why-use-dollarbot">Why use BudgetBot?</a></li>
+    <li><a href="#why-use-budgetbot">Why use BudgetBot?</a></li>
     <li><a href="#demo">Demo</a></li>
     <li><a href="#whats-new">What's new in this version?</a></li>
     <li><a href="#installation-and-setup">Installation and Setup</a></li>
@@ -34,8 +34,8 @@ BudgetBot is a handy little bot built on top of Telegram, to help you with daily
 
 It's easy to setup, run and use on a daily basis!
 
-<a href="https://github.com/deepr41/budget_bot/blob/main/docs/feature-videos.md">Our Bot's Latest Features!</a> • 
-<a href="https://www.canva.com/design/DAFxwU4ABIg/LqMkLeGUBhC__JmWmdkFiQ/watch?utm_content=DAFxwU4ABIg&utm_campaign=designshare&utm_medium=link&utm_source=editor">Click here for a detailed video overview!!</a>
+- <a href="https://github.com/deepr41/budget_bot/blob/main/docs/feature-videos.md">Our Bot's Latest Features!</a> 
+- <a href="https://www.canva.com/design/DAFxwU4ABIg/LqMkLeGUBhC__JmWmdkFiQ/watch?utm_content=DAFxwU4ABIg&utm_campaign=designshare&utm_medium=link&utm_source=editor">Click here for a detailed overview</a>
 
 ## Why use BudgetBot?
 
