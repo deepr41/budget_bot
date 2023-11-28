@@ -1,67 +1,73 @@
-# 💰 Budget Bot 💰
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
+![Issues Open](https://img.shields.io/github/issues/deepr41/budget_bot)
+[![Issues Closed](https://img.shields.io/github/issues-closed/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
+![GitHub last commit](https://img.shields.io/github/last-commit/deepr41/budget_bot/:main)
+![Lines of code](https://tokei.rs/b1/github/deepr41/wolfjobs)
+[![Repo-size](https://img.shields.io/github/repo-size/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
+[![file_count](https://img.shields.io/github/directory-file-count/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
+[![language_count](https://img.shields.io/github/languages/count/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
+[![Downloads](https://img.shields.io/github/downloads/deepr41/budget_bot/total)](https://github.com/deepr41/budget_bot/)
+[![Top Language](https://img.shields.io/github/languages/top/deepr41/budget_bot)](https://github.com/deepr41/budget_bot/)
+[![Release](https://img.shields.io/github/v/release/deepr41/budget_bot)](https://gitHub.com/deepr41/budget_bot)
+[![codecov](https://codecov.io/gh/deepr41/budget_bot/graph/badge.svg?token=DEIGAJO8SW)](https://codecov.io/gh/deepr41/budget_bot)
+
+# 💲 Budget Bot 💲
+
+<!--![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/deepr41/budget_bot/.github/workflows/python-app.yml)-->
 
 <!-- TABLE OF CONTENTS -->
-<b><h3>Table of Contents</h3></b>
-  <ol>
-    <li><a href="#whats-budgetbot">What's BudgetBot?
-    <li><a href="#why-use-budgetbot">Why use BudgetBot?</a></li>
-    <li><a href="#demo">Demo</a></li>
-    <li><a href="#whats-new">What's new in this version?</a></li>
-    <li><a href="#installation-and-setup">Installation and Setup</a></li>
-   <li><a href="#how-to-use">How to use?</a></li>
-   <li><a href="#contributors">Contributors</a></li>
-   <li><a href="#future-work">Future Work</a></li>
-   <li><a href="#acknowledgements">Acknowledgements</a></li>
-  </ol>
+- [What is Budget Bot?](#what-is-budget-bot)
+- [Why use Budget Bot?](#why-use-budget-bot)
+- [Demo](#demo)
+- [What's new in this version?](#whats-new)
+- [Installation and Setup](#installation-and-setup)
+- [How to use?](#how-to-use)
+- [Contributors](#contributors)
+- [Future Scope](#future-scope)
+- [Acknowledgements](#acknowledgements)
 
-Are you a developer? <a href="https://github.com/deepr41/budget_bot/blob/main/Developer_ReadMe.md">Click here: For Developers and Future Contributors</a>
 
-![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
-[![Platform](https://img.shields.io/badge/Platform-Telegram-blue)](https://desktop.telegram.org/)
-![GitHub](https://img.shields.io/badge/Language-Python-blue.svg)
-[![GitHub contributors](https://img.shields.io/github/contributors/aditikilledar/dollar_bot_SE23)](https://github.com/deepr41/budget_bot/graphs/contributors)
-[![DOI](https://zenodo.org/badge/691334031.svg)](https://zenodo.org/doi/10.5281/zenodo.10023639)
-[![Build Status](https://app.travis-ci.com/usmanwardag/dollar_bot.svg?branch=main)](https://app.travis-ci.com/usmanwardag/dollar_bot)
-[![codecov](https://codecov.io/gh/aditikilledar/dollar_bot_SE23/graph/badge.svg?token=23RW1XPB3P)](https://codecov.io/gh/aditikilledar/dollar_bot_SE23)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed/aditikilledar/dollar_bot_SE23)](https://github.com/aditikilledar/dollar_bot_SE23/issues?q=is%3Aissue+is%3Aclosed)
-<!-- [![GitHub closed issues](https://img.shields.io/github/issues-closed/sak007/MyDollarBot-BOTGo)](https://github.com/sak007/MyDollarBot-BOTGo/issues?q=is%3Aissue+is%3Aclosed) -->
+## Are you a developer? 💻
+<a href="https://github.com/deepr41/budget_bot/Developer_ReadMe.md">Detailed Documentation For Developers and Future Contributors</a>
+<br></br>
 
 <hr>
 
-## What's BudgetBot?
+## What is Budget Bot?
 
-BudgetBot is a handy little bot built on top of Telegram, to help you with daily expense tracking and analytics on your past spends. 
-
-It's easy to setup, run and use on a daily basis!
+BudgetBot💲 is a user-friendly Telegram bot designed to simplify your budgeting process and help you manage your finances. <br>
+With intuitive in-chat commands, BudgetBot allows you to effortlessly set and customize your budget, track expenses, add income from various sources, and even predict your next month's budget based on _current_ spending trends.
 
 - <a href="https://github.com/deepr41/budget_bot/blob/main/docs/feature-videos.md">Our Bot's Latest Features!</a> 
-- <a href="https://www.canva.com/design/DAFxwU4ABIg/LqMkLeGUBhC__JmWmdkFiQ/watch?utm_content=DAFxwU4ABIg&utm_campaign=designshare&utm_medium=link&utm_source=editor">Click here for a detailed overview</a>
+- <a href="https://www.canva.com/design/DAFxwU4ABIg/LqMkLeGUBhC__JmWmdkFiQ/">Click here for a video overview!!</a>
+<br>
 
-## Why use BudgetBot?
+## Why use Budget Bot?
 
-With simple in-chat commands, this bot helps you:
-- Set your own customized budget
-- Add/Record new spendings
-- Add your income from different sources
-- Add recurrant spendings
-- Add your monthly savings
-- Add your goals categorywise
-- Display your spending trends through engaging graphs
-- Predict your next month's budget based on your current expenditure
-- Display your spending history
-- Clear/Erase all your records
-- Edit/Change any spending details if you wish to
-- View Analytics and export as a pdf
-- Use OpenAI tools for analysis and tips on expense management
+- **Easy Budgeting💼:** Set and update your budget with simple commands tailored to your financial preferences
+- **Expense Tracking 📅:** Record and categorize your expenses, providing a detailed summary of your spending history
+- **Income Management💵:** Add income from different sources and monitor your financial inflow effortlessly
+- **Graphical Analytics📈**: Visualize your spending trends through expressive graphs, gaining insights into your financial habits
+- **Budget Prediction🔮:** Utilize the bot's analytical capabilities to predict your future budget, ensuring financial planning accuracy
+- **PDF Reports📄:** Generate clear and informative PDF reports of your spending history and analytics for easy reference
+- **Recurring Expenses🔁:** Seamlessly add recurring expenses to enhance the accuracy of your budgeting
+- **Goal Setting🎯:** Set savings goals for specific categories, fostering a proactive approach to financial planning
 
 ## Demo
 
 Demo Video -> [https://www.youtube.com/watch?v=XlndmRhr9Lc]
 
 ## What's new?
+![Enhancements](https://github.com/deepr41/budget_bot/blob/main/docs/Enhancements.png)
 
-We've considerably extended this project to make using BudgetBot easy and engaging.
-![alt text](https://github.com/deepr41/budget_bot/blob/main/docs/Enhancements.png)
+We've considerably extended this project to make using Budget Bot easy and engaging.
+- Expressive Graphs📊: Engaging visual representations of your financial data for better understanding.
+- Budget Prediction🤑: Anticipate your budget for the upcoming month based on your current expenditure patterns.
+- Clearer PDF Reports📈: Improved documentation with more detailed and informative PDF reports for effective analysis.
+- Recurring Expenses🔁: Now you can effortlessly add recurring expenses, ensuring a more comprehensive budget.
+- Enhanced Budget Creation🔄: Updated features for creating, updating, and deleting budgets, providing greater flexibility.
+- Integrated OpenAI API🚀: Receive tips on efficient expense management and enhanced analysis from an AI Advisor.
 
 Check [this documentation out](https://github.com/deepr41/budget_bot/blob/main/docs/whats-new.md) for an in-depth depiction of our changes. :)
 
@@ -70,7 +76,7 @@ Check [this documentation out](https://github.com/deepr41/budget_bot/blob/main/d
 ### Pre-requisite: The Telegram Desktop App
 
 Since BudgetBot is built on top of Telegram, you'll first need:
-1. Download the Telegram Desktop Application <a href="https://desktop.telegram.org/">here.</a>
+1. Download the Telegram Desktop Application <a href="https://desktop.telegram.org/">```https://desktop.telegram.org/```</a>
 ```https://desktop.telegram.org/```
 2. Create a Telegram account or Sign in.
 
@@ -178,17 +184,7 @@ Here's a quick overview of how each of the commands work. Simply enter /<command
 
 #### /Monthly savings: This option comes under budget type and lets you set a savings goal for a month.
 
-## Contributors
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/deepr41"><img src="https://avatars.githubusercontent.com/u/22258487?v=4" width="75px;" alt=""/><br /><sub><b>Deepak Rajendran</b></sub></a></td>
-    <td align="center"><a href="https://github.com/shafa112"><img src="https://avatars.githubusercontent.com/u/39904345?v=4" width="75px;" alt=""/><br /><sub><b>Shafa Hassan</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/Janhavi-23"><img src="https://avatars.githubusercontent.com/u/71866252?v=4" width="75px;" alt=""/><br /><sub><b> Janhavi Pendse</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/deepp2905"><img src="https://avatars.githubusercontent.com/u/62642211?v=4" width="75px;" alt=""/><br /><sub><b>Deep Patel</b></sub></a><br /></td>
-  </tr>
-</table>
-
-## Future Work
+## Future Scope
 
 - Sharing expenses
 - Windows specific setup scripts
@@ -198,7 +194,21 @@ Here's a quick overview of how each of the commands work. Simply enter /<command
 
 ## Acknowledgements
 
-- We would like to express our gratitude 🙏🏻 and a big thank you 😇 to Prof. Dr. Timothy Menzie for giving us the opportunity to get into the shoes of software building and learning new skills and development process throught the project building.
-- A big thank you 😊 to the Teaching Assistants for their support.
-- Thank you to the previous team 😊 for a thorough ReadMe and deatiled documentation.[MyDollarBot](https://github.com/sak007/MyDollarBot-BOTGo)
-- Thank you to the ⭐️[Telegram bot](https://github.com/python-telegram-bot/python-telegram-bot)
+- We extend our heartfelt gratitude to Prof. Dr. Timothy Menzie for affording us the invaluable opportunity to delve into the realm of software building, fostering new skills, and navigating the development process throughout the project.
+
+- A warm and appreciative thank you is extended to the Teaching Assistants for their unwavering support.
+
+- Our sincere thanks are also extended to the [previous team](https://github.com/aditikilledar/dollar_bot_SE23) for providing a comprehensive ReadMe and detailed documentation, which has proven instrumental in our understanding and progress 😊.
+
+- Lastly, a special acknowledgment goes to the Telegram bot, accessible at [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot), for its major contribution to our project.
+
+## Contributors
+
+  <table>
+  <tr>
+    <td align="center"><a href="https://github.com/deepr41"><img src="https://avatars.githubusercontent.com/deepr41" width="100px;" alt=""/><br /><b>Deepak Rajendran</b></a></td>
+    <td align="center"><a href="https://github.com/shafa112"><img src="https://avatars.githubusercontent.com/shafa112" width="100px;" alt=""/><br /><b>Shafa Hassan</b></a><br /></td>
+    <td align="center"><a href="https://github.com/Janhavi-23"><img src="https://avatars.githubusercontent.com/Janhavi-23" width="100px;" alt=""/><br /><b>Janhavi Pendse</b></a><br /></td>
+    <td align="center"><a href="https://github.com/deepp2905"><img src="https://avatars.githubusercontent.com/deepp2905" width="100px;" alt=""/><br /><b>Deep Patel</b></a><br /></td>
+  </tr>
+</table>
