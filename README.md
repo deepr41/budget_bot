@@ -177,8 +177,6 @@ Here's a quick overview of how each of the commands work. Simply enter /<command
 
 #### /Monthly savings: This option comes under budget type and lets you set a savings goal for a month.
 
-#### / JANHAVI'S GOALS AND RECURRANT SPENDINGS INFORMARION NEEDS TO BE ADDED HERE ------ TODO 
-
 ## Contributors
 <table>
   <tr>
