@@ -54,7 +54,7 @@ With intuitive in-chat commands, BudgetBot allows you to effortlessly set and cu
 
 ## Demo
 
-Demo Video -> [https://www.youtube.com/watch?v=XlndmRhr9Lc]
+Demo Video -> [https://www.youtube.com/watch?v=3-w7-B_R0c4]
 
 ## What's new?
 ![Enhancements](https://github.com/deepr41/budget_bot/blob/main/docs/Enhancements.png)
