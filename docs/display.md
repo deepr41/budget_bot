@@ -19,3 +19,4 @@ It takes 2 arguments for processing - **message** which is the message from the 
 Takes 1 argument for processing - **queryResult** which is the query result from the display total function in the same file. It parses the query result and turns it into a form suitable for display on the UI by the user.
 
 # How to run this feature?
+Once the project is running(please follow the instructions given in the main README.md for this), please type /display into the telegram bot.
