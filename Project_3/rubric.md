@@ -32,7 +32,7 @@
 |Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)	|3|Same requirement.txt is used by everyone<br><https://github.com/deepr41/budget_bot/blob/main/requirements.txt>|
 |Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)	|3||
 |Evidence that the members of the team are working across multiple places in the code base	|3|PR by different people<br><https://github.com/deepr41/budget_bot/pulls?q=is%3Apr+is%3Aclosed>|
-|Short release cycles	|3||
+|Short release cycles	|3|<https://github.com/deepr41/budget_bot/releases>|
 
 
 
