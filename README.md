@@ -34,7 +34,8 @@ BudgetBot is a handy little bot built on top of Telegram, to help you with daily
 
 It's easy to setup, run and use on a daily basis!
 
-<a href="https://www.canva.com/design/DAFxwU4ABIg/LqMkLeGUBhC__JmWmdkFiQ/watch?utm_content=DAFxwU4ABIg&utm_campaign=designshare&utm_medium=link&utm_source=editor">Click here for a video overview!!</a>
+<a href="https://github.com/deepr41/budget_bot/blob/main/docs/feature-videos.md">Our Bot's Latest Features!</a>
+<a href="https://www.canva.com/design/DAFxwU4ABIg/LqMkLeGUBhC__JmWmdkFiQ/watch?utm_content=DAFxwU4ABIg&utm_campaign=designshare&utm_medium=link&utm_source=editor">Click here for a detailed video overview!!</a>
 
 ## Why use BudgetBot?
 
