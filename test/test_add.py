@@ -36,7 +36,9 @@ def test_post_currency_selection_working(mock_telebot, mocker):
     mc.send_message.return_value = True
 
     message = create_message("hello from testing!")
-    add.post_currency_selection(message, mc)
+
+    selected_category, date_of_entry = "category", "27-Nov-2023"
+    add.post_currency_selection(message, mc, )
     assert mc.send_message.called
 
 @patch("telebot.telebot")
